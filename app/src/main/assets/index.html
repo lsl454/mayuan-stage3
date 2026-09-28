@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>马原冲刺包</title><style>:root{
+  --bg:#F6F2FF; --ink:#2A1F45; --ink2:#645A7D; --ink3:#A59CBC; --line:#E9E2F7; --card:#FFFFFF;
+  --vio:#7B61FF; --vio-d:#5B42E0; --vio-l:#EEE9FF;
+  --mint:#1DBF94; --mint-d:#12997A; --mint-l:#DDF7EF;
+  --coral:#FF6B6B; --coral-d:#E04B4B; --coral-l:#FFE7E7;
+  --lemon:#FFC83D; --lemon-d:#E3A714; --lemon-l:#FFF4D4;
+  --pink:#FF8FB1; --pink-d:#F06A94; --pink-l:#FFE9F1;
+  --sky:#3AA8FF; --sky-d:#1C8AE0; --sky-l:#E2F2FF;
+  --orange:#FF9F43; --orange-d:#E8822A; --orange-l:#FFF0E0;
+  --cherry:#FF4F6D;
+  --f:system-ui,-apple-system,"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif;
+}
+[hidden]{display:none!important}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:var(--bg)}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:var(--f);font-size:16px;line-height:1.65;
+  -webkit-text-size-adjust:100%;overflow-x:hidden;
+  background:
+    radial-gradient(circle at 6% -4%,#FFE3EF 0,rgba(255,227,239,0) 38%),
+    radial-gradient(circle at 104% 18%,#DFF1FF 0,rgba(223,241,255,0) 34%),
+    radial-gradient(circle at 50% 108%,#FFF1D2 0,rgba(255,241,210,0) 42%),
+    var(--bg);
+  background-attachment:fixed}
+button{font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+p{margin:0}
+h1,h2,h3{margin:0;line-height:1.3}
+:focus-visible{outline:3px solid var(--vio);outline-offset:2px;border-radius:10px}
+#app{max-width:480px;margin:0 auto;padding:0 18px 40px;min-height:100vh}
+#app.enter{animation:enter .22s ease-out}
+@keyframes enter{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
+
+/* ---------- 通用组件 ---------- */
+.btn{--c:var(--vio);--d:var(--vio-d);appearance:none;border:0;font-weight:800;font-size:16px;color:#fff;
+  background:var(--c);border-radius:16px;padding:13px 18px;box-shadow:0 4px 0 var(--d);cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;text-align:center;line-height:1.3;
+  transition:transform .08s,box-shadow .08s}
+.btn:active{transform:translateY(4px);box-shadow:0 0 0 var(--d)}
+.btn:disabled{--c:#DAD4EA;--d:#C6BEDA;cursor:not-allowed}
+.btn:disabled:active{transform:none;box-shadow:0 4px 0 var(--d)}
+.btn.full{width:100%}
+.b-mint{--c:var(--mint);--d:var(--mint-d)}
+.b-coral{--c:var(--coral);--d:var(--coral-d)}
+.b-lemon{--c:var(--lemon);--d:var(--lemon-d);color:var(--ink)}
+.b-pink{--c:var(--pink);--d:var(--pink-d)}
+.b-ghost{--c:#fff;--d:#E2DAF3;color:var(--ink)}
+.btn-sm{padding:8px 13px;font-size:14px;border-radius:12px;box-shadow:0 3px 0 var(--d)}
+.btn-sm:active{transform:translateY(3px)}
+.ib{width:42px;height:42px;border-radius:14px;border:0;background:#fff;display:grid;place-items:center;
+  box-shadow:0 3px 0 #E2DAF3;cursor:pointer;color:var(--ink2);flex:none}
+.ib svg{width:22px;height:22px}
+.ib:active{transform:translateY(3px);box-shadow:none}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;font-weight:800;padding:3px 10px;
+  border-radius:999px;background:var(--vio-l);color:var(--vio-d);white-space:nowrap}
+.c-xu{background:var(--sky-l);color:var(--sky-d)}
+.c-zhe{background:var(--vio-l);color:var(--vio-d)}
+.c-jing{background:var(--orange-l);color:var(--orange-d)}
+.c-ke{background:var(--pink-l);color:var(--pink-d)}
+.c-sa{background:var(--mint-l);color:var(--mint-d)}
+.c-lun{background:var(--lemon-l);color:#B98300}
+.muted{color:var(--ink2)}
+.small{font-size:13.5px}
+.card{background:#fff;border-radius:22px;padding:16px;box-shadow:0 12px 26px -18px rgba(91,66,224,.45)}
+
+/* 顶栏 */
+.tb{display:flex;align-items:center;gap:12px;padding:14px 0 10px;position:sticky;top:0;z-index:20;
+  background:linear-gradient(var(--bg) 78%,rgba(246,242,255,0))}
+.tb h1{font-size:19px;font-weight:900;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tb-r{display:flex;gap:8px;align-items:center}
+
+/* ---------- 吉祥物 马小原 ---------- */
+.mascot{display:block;overflow:visible}
+.mascot.big{width:128px;height:132px;animation:bob 3.4s ease-in-out infinite;transform-origin:50% 92%}
+.mascot.mid{width:92px;height:95px}
+.mascot.mini{width:58px;height:60px}
+.mascot .e-happy,.mascot .mo-open,.mascot .mo-sad,.mascot .sweat,.mascot .stars{display:none}
+.m-happy .e-norm,.m-cheer .e-norm{display:none}
+.m-happy .e-happy,.m-cheer .e-happy{display:inline}
+.m-happy .mo-smile,.m-cheer .mo-smile,.m-sad .mo-smile{display:none}
+.m-happy .mo-open,.m-cheer .mo-open{display:inline}
+.m-sad .mo-sad,.m-sad .sweat{display:inline}
+.m-cheer .stars{display:inline;animation:twinkle .9s ease-in-out infinite}
+.mascot .e-norm{transform-box:fill-box;transform-origin:center;animation:blink 4.6s infinite}
+.mascot.m-happy{animation:hop .45s ease 2}
+.mascot.m-cheer{animation:hop .45s ease 4}
+.mascot.m-sad{animation:droop .9s ease}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes hop{0%,100%{transform:translateY(0) scale(1)}35%{transform:translateY(-14px) scale(.96,1.05)}65%{transform:translateY(0) scale(1.06,.94)}}
+@keyframes droop{0%,100%{transform:rotate(0)}30%{transform:rotate(-7deg)}60%{transform:rotate(4deg)}}
+@keyframes blink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.12)}}
+@keyframes twinkle{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* ---------- 首页 ---------- */
+.hrow{display:flex;align-items:center;justify-content:space-between;padding:16px 0 6px}
+.streak{display:inline-flex;align-items:center;gap:6px;background:#fff;border-radius:999px;padding:7px 14px;
+  font-weight:800;font-size:14px;box-shadow:0 3px 0 #E2DAF3;color:var(--ink3)}
+.streak.on{color:var(--orange-d)}
+.streak b{font-size:17px;color:inherit}
+.hbtns{display:flex;gap:8px}
+.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;padding:18px 2px 4px}
+.board{position:relative;flex:none;width:152px;border:0;padding:0;background:#fff;border-radius:20px;
+  text-align:center;cursor:pointer;box-shadow:0 16px 30px -16px rgba(255,79,109,.7),0 4px 0 #F2D3DB;
+  transition:transform .12s}
+.board:active{transform:translateY(3px) rotate(-1deg)}
+.board::after{content:"";position:absolute;left:7px;right:7px;bottom:-7px;height:14px;background:#fff;
+  border-radius:0 0 16px 16px;z-index:-1;box-shadow:0 4px 0 #F2D3DB}
+.board .rings{position:absolute;top:-10px;left:0;right:0;display:flex;justify-content:space-between;padding:0 34px}
+.board .rings i{display:block;width:10px;height:22px;border-radius:6px;background:linear-gradient(#D8D0EC,#A399C2);
+  box-shadow:inset 0 -2px 0 rgba(0,0,0,.12)}
+.board .bh{display:block;background:var(--cherry);color:#fff;font-weight:800;font-size:14px;
+  padding:14px 8px 9px;border-radius:20px 20px 0 0;letter-spacing:.08em}
+.board .bn{display:block;font-size:66px;font-weight:900;line-height:1;padding:14px 0 0;color:var(--ink);
+  font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.board .bn.q{color:var(--ink3)}
+.board .bu{display:block;font-size:14px;color:var(--ink2);padding:4px 0 14px;font-weight:700}
+.hm{flex:1;display:flex;flex-direction:column;align-items:center;min-width:0}
+.say{position:relative;background:#fff;border-radius:16px;padding:9px 12px;font-size:13.5px;font-weight:700;
+  line-height:1.45;margin-bottom:8px;box-shadow:0 8px 18px -12px rgba(91,66,224,.5);text-align:center;max-width:190px}
+.say::after{content:"";position:absolute;left:50%;bottom:-7px;margin-left:-7px;border:7px solid transparent;
+  border-bottom:0;border-top-color:#fff}
+.lvbar{display:flex;align-items:center;gap:10px;margin:18px 0 0;background:#fff;border-radius:16px;padding:10px 14px;
+  box-shadow:0 3px 0 #E8E1F6}
+.lvt{font-weight:900;font-size:14px;white-space:nowrap}
+.xpb{flex:1;height:10px;border-radius:99px;background:var(--vio-l);overflow:hidden}
+.xpb i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--vio),var(--pink));transition:width .8s}
+.xpn{font-size:12.5px;color:var(--ink2);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.today{margin-top:16px}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;margin:0 2px 10px}
+.sec-h h2{font-size:18px;font-weight:900}
+.sec-h span{font-size:13px;color:var(--ink2);font-weight:700}
+.rings3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.r3{background:#fff;border-radius:20px;padding:12px 6px 10px;display:flex;flex-direction:column;align-items:center;
+  box-shadow:0 3px 0 #E8E1F6;position:relative}
+.r3:active{transform:translateY(3px);box-shadow:none}
+.r3 .rw{position:relative;width:62px;height:62px}
+.r3 svg{width:62px;height:62px;transform:rotate(-90deg)}
+.r3 .rt{fill:none;stroke:#F0EBFB;stroke-width:7}
+.r3 .rv{fill:none;stroke-width:7;stroke-linecap:round;transition:stroke-dashoffset .9s cubic-bezier(.3,.8,.3,1)}
+.r3 .ri{position:absolute;inset:0;display:grid;place-items:center;font-size:24px}
+.r3 .rl{font-size:13px;font-weight:800;margin-top:6px}
+.r3 .rc{font-size:12px;color:var(--ink2);font-variant-numeric:tabular-nums}
+.r3 .ok{position:absolute;top:6px;right:8px;width:22px;height:22px;border-radius:50%;background:var(--mint);color:#fff;
+  font-size:13px;font-weight:900;display:grid;place-items:center}
+
+.bento{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.tile{position:relative;border-radius:22px;padding:15px 15px 14px;min-height:118px;display:flex;flex-direction:column;
+  justify-content:flex-end;overflow:hidden;box-shadow:0 4px 0 var(--td)}
+.tile:active{transform:translateY(4px);box-shadow:0 0 0 var(--td)}
+.tile .te{position:absolute;right:10px;top:8px;font-size:40px;line-height:1}
+.tile .tt{font-size:17px;font-weight:900}
+.tile .ts{font-size:12.5px;font-weight:700;opacity:.8}
+.tile .tbar{height:6px;border-radius:9px;background:rgba(255,255,255,.55);margin-top:8px;overflow:hidden}
+.tile .tbar i{display:block;height:100%;background:currentColor;border-radius:9px;opacity:.75}
+.t-cards{grid-row:span 2;background:#E7E0FF;color:#4A33C4;--td:#CFC3FF;min-height:248px}
+.t-cards .te{font-size:62px;right:auto;left:14px;top:14px}
+.t-blitz{background:var(--lemon-l);color:#946A00;--td:#F6DE98}
+.t-sq{background:var(--mint-l);color:#0C7A60;--td:#B5EBDB}
+.t-exam{grid-column:span 2;background:#FFE2E6;color:#C2273F;--td:#FBC2CB;min-height:104px}
+.t-exam .papers{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.t-exam .pp{background:rgba(255,255,255,.7);border-radius:10px;padding:3px 9px;font-size:12.5px;font-weight:800}
+.mini3{grid-column:span 2;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tile.sm{min-height:98px;padding:12px}
+.tile.sm .te{font-size:30px;right:8px;top:8px}
+.tile.sm .tt{font-size:15px}
+.t-wrong{background:var(--coral-l);color:#C43838;--td:#F8C4C4}
+.t-kit{background:var(--sky-l);color:#1172C2;--td:#BFE1FC}
+.t-ach{background:var(--pink-l);color:#C8406E;--td:#F9C6D8}
+.badge-n{position:absolute;top:8px;left:10px;min-width:22px;height:22px;padding:0 6px;border-radius:99px;
+  background:var(--coral);color:#fff;font-size:12px;font-weight:900;display:grid;place-items:center}
+
+.pred{margin-top:18px;background:#fff;border-radius:22px;padding:16px;box-shadow:0 3px 0 #E8E1F6}
+.pred-h{display:flex;align-items:baseline;justify-content:space-between}
+.pred-h span{font-size:14px;font-weight:800;color:var(--ink2)}
+.pred-h b{font-size:30px;font-weight:900;font-variant-numeric:tabular-nums}
+.pred-h b small{font-size:14px;color:var(--ink2);margin-left:2px}
+.pbar{position:relative;height:14px;border-radius:99px;background:#F1ECFB;margin:12px 0 8px}
+.pbar i{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:linear-gradient(90deg,var(--coral),var(--lemon) 55%,var(--mint));transition:width 1s}
+.pbar em{position:absolute;top:-6px;bottom:-6px;width:3px;margin-left:-1.5px;background:var(--ink);border-radius:3px;font-style:normal}
+.pbar em::after{content:"及格 60";position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:800;white-space:nowrap}
+.pred p{font-size:12.5px;color:var(--ink2);line-height:1.55}
+
+/* ---------- 闪卡 ---------- */
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px;margin:0 -18px;padding-left:18px;padding-right:18px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.fchip{flex:none;border:0;border-radius:999px;padding:8px 14px;font-weight:800;font-size:14px;background:#fff;
+  color:var(--ink2);box-shadow:0 3px 0 #E8E1F6;cursor:pointer}
+.fchip.on{background:var(--ink);color:#fff;box-shadow:0 3px 0 #120B24}
+.fc-meta{display:flex;align-items:center;justify-content:space-between;margin:6px 2px 12px;font-size:13.5px;font-weight:700;color:var(--ink2)}
+.fc-meta b{color:var(--ink)}
+.deck{position:relative;height:360px;margin:6px 0 22px;perspective:1300px}
+.fcard{position:absolute;inset:0;border-radius:26px}
+.fcard.b1{transform:translateY(14px) scale(.95);background:#E3DBFF;box-shadow:0 10px 0 -4px #D5CAFF}
+.fcard.b2{transform:translateY(26px) scale(.9);background:#D6CBFF}
+.fcard.top{touch-action:pan-y;cursor:grab;transition:transform .32s cubic-bezier(.2,.9,.3,1.2),opacity .3s;z-index:2}
+.fcard.top.in{animation:cardIn .32s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes cardIn{from{transform:translateY(14px) scale(.95)}to{transform:none}}
+.flip{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.3,.9,.3,1)}
+.fcard.flipped .flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:26px;padding:22px 20px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  display:flex;flex-direction:column;overflow:hidden}
+.face.front{background:#fff;box-shadow:0 18px 34px -20px rgba(91,66,224,.6)}
+.face.front::before{content:"";position:absolute;right:-40px;bottom:-40px;width:170px;height:170px;border-radius:50%;background:var(--vio-l)}
+.face.back{background:var(--ink);color:#fff;transform:rotateY(180deg);box-shadow:0 18px 34px -20px rgba(42,31,69,.8)}
+.fq{position:relative;font-size:24px;font-weight:900;line-height:1.45;margin:16px 0 auto}
+.fhint{position:relative;font-size:13px;color:var(--ink3);font-weight:700}
+.fa{font-size:21px;font-weight:900;line-height:1.55;margin:6px 0 auto;color:#FFE07A}
+.fa-l{font-size:12.5px;font-weight:800;color:#B9AEDA}
+.fm{font-size:14px;line-height:1.6;color:#DCD4F5;border-top:1px dashed rgba(255,255,255,.25);padding-top:10px}
+.stamp{position:absolute;top:26px;padding:4px 12px;border:3px solid;border-radius:12px;font-size:20px;font-weight:900;
+  opacity:0;transform:rotate(-12deg);z-index:3;pointer-events:none;background:rgba(255,255,255,.9)}
+.stamp.s-ok{left:18px;color:var(--mint);border-color:var(--mint)}
+.stamp.s-no{right:18px;color:#D19300;border-color:var(--lemon);transform:rotate(12deg)}
+.fc-act{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.fc-done{text-align:center;padding:26px 10px}
+.fc-done .mascot{margin:0 auto 10px}
+.fc-done h2{font-size:22px;font-weight:900;margin-bottom:6px}
+.fc-done .row{display:flex;gap:10px;justify-content:center;margin-top:18px}
+
+/* ---------- 闪电战 ---------- */
+.bz-hero{display:flex;align-items:center;gap:12px;background:var(--lemon-l);border-radius:22px;padding:14px 16px;margin-top:4px}
+.bz-hero p{font-weight:800;font-size:15px;line-height:1.5}
+.bz-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0}
+.bz-stats div{background:#fff;border-radius:18px;padding:11px 8px;text-align:center;box-shadow:0 3px 0 #E8E1F6}
+.bz-stats b{display:block;font-size:22px;font-weight:900;font-variant-numeric:tabular-nums}
+.bz-stats span{font-size:12px;color:var(--ink2);font-weight:700}
+.daygrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0 18px}
+.dayb{border:0;background:#fff;border-radius:18px;padding:12px 14px;text-align:left;box-shadow:0 3px 0 #E8E1F6;cursor:pointer}
+.dayb:active{transform:translateY(3px);box-shadow:none}
+.dayb b{display:block;font-size:15px;font-weight:900}
+.dayb span{font-size:12px;color:var(--ink2);font-weight:700}
+.dots{display:flex;gap:5px;margin:2px 0 12px}
+.dots i{flex:1;height:7px;border-radius:9px;background:#E7E0F6}
+.dots i.ok{background:var(--mint)}
+.dots i.bad{background:var(--coral)}
+.dots i.cur{background:var(--vio)}
+.combo{display:inline-flex;align-items:center;gap:4px;background:var(--lemon);color:var(--ink);border-radius:999px;
+  padding:5px 12px;font-weight:900;font-size:14px;box-shadow:0 3px 0 var(--lemon-d)}
+.combo.pop{animation:pop .35s ease}
+.timer{height:8px;border-radius:9px;background:#EDE7FA;overflow:hidden;margin-bottom:14px;position:relative}
+.timer i{position:absolute;left:0;top:0;bottom:0;width:100%;border-radius:9px;background:var(--lemon);transform-origin:left}
+.timer i.run{animation:drain 20s linear forwards}
+@keyframes drain{0%{transform:scaleX(1);background:var(--lemon)}49%{background:var(--lemon)}50%{background:#CFC7E3}100%{transform:scaleX(0);background:#CFC7E3}}
+.timer-l{display:flex;justify-content:space-between;font-size:12px;font-weight:800;color:var(--ink3);margin:-8px 0 12px}
+.qcard{background:#fff;border-radius:24px;padding:18px 16px 12px;box-shadow:0 14px 28px -20px rgba(91,66,224,.55)}
+.qcard .qs{font-size:18.5px;font-weight:800;line-height:1.62;margin:10px 0 14px}
+.opt{width:100%;display:flex;align-items:center;gap:12px;border:2px solid #EEE8FA;background:#FBFAFF;border-radius:16px;
+  padding:10px 12px;margin-bottom:9px;text-align:left;cursor:pointer;font-size:16px;line-height:1.5;transition:border-color .2s,background .2s}
+.opt:active{transform:scale(.985)}
+.bub{position:relative;flex:none;width:34px;height:34px;border-radius:50%;border:2.5px solid #BDB3D6;display:grid;place-items:center;overflow:hidden;background:#fff}
+.bub b{position:relative;z-index:1;font-weight:900;font-size:15px;color:var(--ink2)}
+.bub::after{content:"";position:absolute;inset:-2px;border-radius:50%;transform:scale(0);
+  background:repeating-linear-gradient(-38deg,rgba(255,255,255,0) 0 3px,rgba(255,255,255,.14) 3px 4px),var(--fill,var(--ink))}
+.opt.picked .bub::after{animation:fill .3s ease-out forwards}
+.opt.picked .bub b{color:#fff;transition:color .15s .12s}
+@keyframes fill{0%{transform:scale(0) rotate(-25deg)}70%{transform:scale(1.1) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
+.opt.ok{--fill:var(--mint);border-color:var(--mint);background:var(--mint-l)}
+.opt.ok .bub{border-color:var(--mint)}
+.opt.bad{--fill:var(--coral);border-color:var(--coral);background:var(--coral-l)}
+.opt.bad .bub{border-color:var(--coral)}
+.opt.right{border-color:var(--mint);background:var(--mint-l);animation:pulse .7s ease 2}
+.opt.right .bub{border-color:var(--mint)}
+.opt.right .bub b{color:var(--mint-d)}
+.opt.ink{--fill:var(--ink);border-color:#CFC5EA;background:#F4F0FF}
+.opt.ink .bub{border-color:var(--ink)}
+.opt[disabled]{cursor:default}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
+.shake{animation:shake .45s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(4px)}}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.25)}100%{transform:scale(1)}}
+.exp{margin-top:12px;border-radius:20px;padding:14px 16px;animation:slideUp .28s ease-out}
+.exp.ok{background:var(--mint-l)}
+.exp.bad{background:var(--coral-l)}
+.exp .v{font-weight:900;font-size:16px;margin-bottom:4px}
+.exp.ok .v{color:var(--mint-d)}
+.exp.bad .v{color:var(--coral-d)}
+.exp .w{font-size:15px;line-height:1.65}
+.exp .s{font-size:12.5px;color:var(--ink2);margin-top:6px}
+.exp .btn{margin-top:12px}
+@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.bz-side{display:flex;justify-content:flex-end;margin-top:-6px}
+.combo-pop{position:fixed;left:50%;top:38%;z-index:95;pointer-events:none;font-size:40px;font-weight:900;color:#fff;
+  -webkit-text-stroke:2px var(--ink);text-shadow:0 5px 0 var(--ink);white-space:nowrap;
+  animation:comboIn 1.1s cubic-bezier(.2,1.4,.4,1) forwards}
+@keyframes comboIn{0%{transform:translate(-50%,-50%) scale(.2) rotate(-12deg);opacity:0}25%{transform:translate(-50%,-50%) scale(1.15) rotate(3deg);opacity:1}
+  70%{transform:translate(-50%,-50%) scale(1) rotate(0);opacity:1}100%{transform:translate(-50%,-90%) scale(.9);opacity:0}}
+.float{position:fixed;z-index:96;pointer-events:none;font-weight:900;font-size:17px;white-space:nowrap;transform:translate(-50%,-50%);
+  animation:floatUp 1s ease-out forwards}
+.float.xp{color:#C98E00;text-shadow:0 2px 0 #fff}
+.float.kill{color:var(--coral-d);text-shadow:0 2px 0 #fff;font-size:19px}
+@keyframes floatUp{from{opacity:0;transform:translate(-50%,-30%)}20%{opacity:1}to{opacity:0;transform:translate(-50%,-180%)}}
+
+/* 结果 */
+.res{text-align:center;padding-top:10px}
+.res .mascot{margin:0 auto}
+.res h2{font-size:22px;font-weight:900;margin:6px 0 2px}
+.bigscore{font-size:64px;font-weight:900;line-height:1.05;font-variant-numeric:tabular-nums}
+.bigscore small{font-size:20px;color:var(--ink2);font-weight:800}
+.res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.res-grid div{background:#fff;border-radius:18px;padding:11px 6px;box-shadow:0 3px 0 #E8E1F6}
+.res-grid b{display:block;font-size:22px;font-weight:900}
+.res-grid span{font-size:12px;color:var(--ink2);font-weight:700}
+.wl{text-align:left;margin-top:8px}
+.witem{background:#fff;border-radius:18px;padding:12px 14px;margin-bottom:10px;box-shadow:0 3px 0 #EEE8FA}
+.witem .wq{font-weight:800;font-size:15px;line-height:1.55;margin:6px 0 4px}
+.witem .wa{font-size:14px;color:var(--mint-d);font-weight:800}
+.witem .ww{font-size:13.5px;color:var(--ink2);margin-top:4px;line-height:1.6}
+.witem .ws{font-size:12px;color:var(--ink3);margin-top:4px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+
+/* ---------- 主观题 ---------- */
+.intro{background:#fff;border-radius:20px;padding:13px 15px;font-size:14px;line-height:1.6;color:var(--ink2);box-shadow:0 3px 0 #EEE8FA}
+.intro b{color:var(--ink)}
+.paper-h{font-size:16px;font-weight:900;margin:20px 2px 10px}
+.sqi{display:flex;align-items:center;gap:10px;background:#fff;border-radius:18px;padding:12px 14px;margin-bottom:10px;box-shadow:0 3px 0 #EEE8FA}
+.sqi:active{transform:translateY(3px);box-shadow:none}
+.sqi .n{flex:none;width:34px;height:34px;border-radius:12px;display:grid;place-items:center;font-weight:900;font-size:14px;background:var(--vio-l);color:var(--vio-d)}
+.sqi .t{flex:1;min-width:0;font-size:14.5px;font-weight:700;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.stars{display:inline-flex;gap:1px;font-size:14px;letter-spacing:0;flex:none}
+.stars i{font-style:normal;color:#E0D9EF}
+.stars i.on{color:var(--lemon)}
+.sq-stem{background:#fff;border-radius:22px;padding:16px;box-shadow:0 12px 26px -18px rgba(91,66,224,.45)}
+.sq-stem p{font-size:17.5px;font-weight:800;line-height:1.62;margin-top:8px}
+.sq-hint{font-size:13.5px;color:var(--ink2);margin:12px 4px 10px;line-height:1.6}
+.paper{border-radius:20px;padding:10px 14px 12px 40px;position:relative;
+  background:repeating-linear-gradient(#fff 0 43px,#E9E3F7 43px 44px);box-shadow:0 3px 0 #EEE8FA}
+.paper::before{content:"";position:absolute;left:28px;top:0;bottom:0;width:2px;background:#FFC3CF}
+.slot{width:100%;min-height:44px;border:0;background:transparent;display:flex;align-items:center;gap:8px;text-align:left;
+  padding:2px 0;cursor:pointer}
+.slot .sn{flex:none;font-weight:900;color:var(--ink3);font-size:15px;width:34px}
+.slot .sv{flex:1;min-height:32px;border-radius:10px;border:2px dashed #D8CFEE;display:flex;align-items:center;padding:3px 10px;font-size:15px;font-weight:700;line-height:1.4}
+.slot.f .sv{border:2px solid var(--vio);background:var(--vio-l);animation:pop .25s ease}
+.slot.f .sn{color:var(--vio)}
+.slot.ok .sv,.slot.bad .sv{border-style:solid}
+.slot.ok .sv{border-color:var(--mint);background:var(--mint-l)}
+.slot.bad .sv{border-color:var(--coral);background:var(--coral-l);text-decoration:line-through;text-decoration-color:var(--coral-d)}
+.pool{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 16px}
+.pchip{border:0;background:#fff;border-radius:14px;padding:9px 13px;font-size:14.5px;font-weight:800;line-height:1.35;text-align:left;
+  box-shadow:0 3px 0 #DDD4F1;cursor:pointer}
+.pchip:active{transform:translateY(3px);box-shadow:none}
+.pchip.used{visibility:hidden}
+.miss{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.miss span{border:2px solid var(--mint);color:var(--mint-d);border-radius:12px;padding:4px 10px;font-size:13.5px;font-weight:800}
+.star-row{display:flex;justify-content:center;gap:6px;font-size:44px;margin:4px 0}
+.star-row i{font-style:normal;color:#E3DDF0;transform:scale(0);animation:starIn .45s cubic-bezier(.2,1.5,.4,1) forwards}
+.star-row i.on{color:var(--lemon);text-shadow:0 3px 0 var(--lemon-d)}
+@keyframes starIn{to{transform:scale(1)}}
+.ans{background:#fff;border-radius:22px;padding:16px;margin-top:14px;box-shadow:0 3px 0 #EEE8FA}
+.ans-h{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.ans-h h3{font-size:16px;font-weight:900}
+.ans .body{font-size:15.5px;line-height:1.9}
+.ans .body mark{background:linear-gradient(transparent 55%,#FFE38A 55%);color:inherit;font-weight:800;padding:0 1px}
+.ans .body.cloze mark{color:transparent;background:#EDE7FB;border-radius:6px;cursor:pointer;text-shadow:none}
+.ans .body.cloze mark.rv{color:inherit;background:linear-gradient(transparent 55%,#B8F0DF 55%)}
+.ans .src{font-size:12px;color:var(--ink3);margin-top:8px}
+.tip{display:flex;gap:10px;align-items:flex-start;background:var(--lemon-l);border-radius:18px;padding:12px 14px;margin-top:12px;font-size:14px;font-weight:700;line-height:1.6}
+.toggle{border:0;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:800;background:var(--vio-l);color:var(--vio-d);cursor:pointer}
+.toggle.on{background:var(--ink);color:#fff}
+
+/* ---------- 模拟考 ---------- */
+.plan{display:flex;height:34px;border-radius:12px;overflow:hidden;margin:10px 0 6px;font-size:12.5px;font-weight:900;color:#fff}
+.plan div{display:grid;place-items:center}
+.plan-l{display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink2);font-weight:700}
+.paperc{background:#fff;border-radius:22px;padding:16px;margin-top:14px;box-shadow:0 4px 0 #EEE8FA}
+.paperc h3{font-size:18px;font-weight:900}
+.paperc .meta{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 12px}
+.paperc .meta span{background:#F4F0FF;border-radius:10px;padding:3px 9px;font-size:12.5px;font-weight:800;color:var(--ink2)}
+.paperc .meta span.best{background:var(--mint-l);color:var(--mint-d)}
+.ex-top{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:10px;padding:12px 0 8px;background:var(--bg)}
+.ex-timer{flex:1;text-align:center;font-weight:900;font-size:22px;font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.ex-timer.urgent{color:var(--coral-d);animation:pulse 1s infinite}
+.ex-tabs{position:sticky;top:62px;z-index:29;display:flex;gap:6px;padding:0 0 10px;background:var(--bg)}
+.ex-tabs button.tab{flex:1;border:0;border-radius:14px;padding:7px 4px;font-size:13px;font-weight:800;background:#fff;color:var(--ink2);box-shadow:0 3px 0 #E8E1F6;cursor:pointer;line-height:1.3}
+.ex-tabs button.tab b{display:block;font-size:12px;font-weight:700;color:var(--ink3);font-variant-numeric:tabular-nums}
+.ex-tabs button.tab.on{background:var(--ink);color:#fff;box-shadow:0 3px 0 #120B24}
+.ex-tabs button.tab.on b{color:#C9BFEA}
+.qno{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.qno b{font-size:14px;font-weight:900;color:var(--vio-d)}
+.flagb{border:0;background:#F4F0FF;border-radius:10px;padding:5px 10px;font-size:13px;font-weight:800;color:var(--ink2);display:inline-flex;align-items:center;gap:4px;cursor:pointer}
+.flagb svg{width:15px;height:15px}
+.flagb.on{background:#FFE2E6;color:var(--cherry)}
+.ex-foot{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+textarea.wr{width:100%;min-height:190px;border:2px solid #E6DFF6;border-radius:16px;padding:12px 14px;font:inherit;font-size:15.5px;
+  line-height:1.8;color:var(--ink);resize:vertical;background:repeating-linear-gradient(#fff 0 27px,#F0EBFB 27px 28px);background-attachment:local}
+textarea.wr:focus{outline:none;border-color:var(--vio)}
+.wr-tools{display:flex;justify-content:space-between;align-items:center;margin:8px 2px 0;font-size:12.5px;color:var(--ink3);font-weight:700}
+.lunc{background:#fff;border-radius:22px;padding:14px 16px;margin-bottom:12px;box-shadow:0 3px 0 #EEE8FA}
+.lunc.on{box-shadow:0 0 0 3px var(--vio),0 3px 0 #EEE8FA}
+.lunc .lh{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.lunc p{font-size:15.5px;font-weight:800;line-height:1.6;margin:8px 0 10px}
+.pick{border:0;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:900;background:#F4F0FF;color:var(--ink2);cursor:pointer;flex:none}
+.pick.on{background:var(--vio);color:#fff}
+.grid25{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:12px 0 14px}
+.gb{position:relative;aspect-ratio:1;border-radius:50%;border:2.5px solid #BDB3D6;background:#fff;font-weight:900;font-size:14px;color:var(--ink2);cursor:pointer}
+.gb.f{background:var(--ink);border-color:var(--ink);color:#fff}
+.gb.cur{box-shadow:0 0 0 3px var(--vio-l),0 0 0 5px var(--vio)}
+.gb.fl::after{content:"";position:absolute;top:-3px;right:-3px;width:11px;height:11px;border-radius:50%;background:var(--cherry);border:2px solid #fff}
+.gsub{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:10px;font-size:13px;font-weight:800;color:var(--ink2)}
+.gsub span{padding:3px 9px;border-radius:10px;background:#F4F0FF}
+.gsub span.f{background:var(--ink);color:#fff}
+
+/* 评分 */
+.gauge{position:relative;width:240px;margin:6px auto 0}
+.gauge svg{width:240px;height:140px;display:block}
+.gauge .gt{fill:none;stroke:#EEE8FA;stroke-width:20;stroke-linecap:round}
+.gauge .gv{fill:none;stroke-width:20;stroke-linecap:round;transition:stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1)}
+.gauge .gn{position:absolute;left:0;right:0;bottom:6px;text-align:center}
+.gauge .gn b{font-size:48px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums}
+.gauge .gn span{display:block;font-size:13px;color:var(--ink2);font-weight:800}
+.gradec{background:#fff;border-radius:22px;padding:15px 16px;margin-top:12px;box-shadow:0 3px 0 #EEE8FA}
+.gradec .gh{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.gradec .gh p{font-size:15px;font-weight:800;line-height:1.55}
+.gradec .sc{flex:none;font-weight:900;font-size:18px;color:var(--vio-d);font-variant-numeric:tabular-nums}
+.gradec details{margin:8px 0}
+.gradec summary{font-size:13px;font-weight:800;color:var(--ink2);cursor:pointer}
+.gradec pre{white-space:pre-wrap;font:inherit;font-size:14px;background:#FAF8FF;border-radius:12px;padding:10px;margin:6px 0 0;color:var(--ink2)}
+.ck{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px dashed #EEE8FA;cursor:pointer;font-size:14.5px;font-weight:700;line-height:1.45}
+.ck input{appearance:none;flex:none;width:24px;height:24px;border-radius:8px;border:2.5px solid #C8BEE2;margin:0;display:grid;place-items:center;cursor:pointer;background:#fff}
+.ck input:checked{background:var(--mint);border-color:var(--mint)}
+.ck input:checked::after{content:"✓";color:#fff;font-weight:900;font-size:15px}
+
+/* ---------- 错题本 / 锦囊 / 成就 / 设置 ---------- */
+.empty{text-align:center;padding:30px 10px}
+.empty .mascot{margin:0 auto 8px}
+.empty h2{font-size:20px;font-weight:900;margin-bottom:6px}
+.empty p{color:var(--ink2);margin-bottom:16px}
+.kit-sec{background:#fff;border-radius:22px;padding:16px;margin-top:14px;box-shadow:0 3px 0 #EEE8FA}
+.kit-sec h2{font-size:17px;font-weight:900;margin-bottom:10px}
+.tl{position:relative;padding-left:20px}
+.tl::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:3px;border-radius:3px;background:#EEE8FA}
+.tl div{position:relative;padding:4px 0 10px}
+.tl div::before{content:"";position:absolute;left:-19px;top:10px;width:13px;height:13px;border-radius:50%;background:var(--c);border:3px solid #fff;box-shadow:0 0 0 2px var(--c)}
+.tl b{font-size:15px}
+.tl span{display:block;font-size:13.5px;color:var(--ink2);line-height:1.55}
+.rule{display:flex;gap:12px;padding:10px 0;border-top:1px dashed #EEE8FA}
+.rule:first-of-type{border-top:0}
+.rule .re{flex:none;width:40px;height:40px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:var(--vio-l)}
+.rule b{display:block;font-size:15px}
+.rule span{font-size:13.5px;color:var(--ink2);line-height:1.55}
+.kou{border-left:4px solid var(--c);background:#FBFAFF;border-radius:0 14px 14px 0;padding:9px 12px;margin-bottom:9px}
+.kou b{display:block;font-size:14.5px}
+.kou span{font-size:13.5px;color:var(--ink2);line-height:1.6}
+.ach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}
+.ach{background:#fff;border-radius:20px;padding:14px 8px 12px;text-align:center;box-shadow:0 3px 0 #EEE8FA}
+.ach .md{width:58px;height:58px;margin:0 auto 8px;border-radius:50%;display:grid;place-items:center;font-size:28px;
+  background:radial-gradient(circle at 35% 30%,#FFF6CF,#FFC83D);box-shadow:0 4px 0 var(--lemon-d),inset 0 -4px 0 rgba(0,0,0,.08);position:relative;overflow:hidden}
+.ach .md::after{content:"";position:absolute;top:-30%;left:-60%;width:40%;height:160%;background:rgba(255,255,255,.55);transform:rotate(25deg);animation:shine 3.2s ease-in-out infinite}
+@keyframes shine{0%,60%{left:-60%}100%{left:130%}}
+.ach.lock .md{background:#EEE9F8;box-shadow:0 4px 0 #DCD4EE;filter:grayscale(1);opacity:.6}
+.ach.lock .md::after{display:none}
+.ach b{display:block;font-size:13.5px;font-weight:900;line-height:1.35}
+.ach span{display:block;font-size:11.5px;color:var(--ink2);line-height:1.45;margin-top:3px}
+.set{background:#fff;border-radius:22px;padding:4px 16px;margin-top:14px;box-shadow:0 3px 0 #EEE8FA}
+.set label,.set .sr{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;border-top:1px dashed #EEE8FA;font-weight:800}
+.set label:first-child,.set .sr:first-child{border-top:0}
+.set input[type=date]{font:inherit;font-size:15px;border:2px solid #E6DFF6;border-radius:12px;padding:6px 10px;color:var(--ink);background:#fff}
+.sw{appearance:none;width:50px;height:30px;border-radius:99px;background:#DCD5EC;position:relative;cursor:pointer;transition:background .2s;flex:none;margin:0}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.2);transition:transform .2s}
+.sw:checked{background:var(--mint)}
+.sw:checked::after{transform:translateX(20px)}
+.about{font-size:12.5px;color:var(--ink2);line-height:1.7;padding:14px 4px}
+
+/* ---------- 弹层 / 提示 ---------- */
+#modal{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:20px}
+#modal[hidden]{display:none}
+#modal .mbg{position:absolute;inset:0;background:rgba(42,31,69,.45);opacity:0;transition:opacity .2s}
+#modal .mbox{position:relative;width:100%;max-width:400px;max-height:86vh;overflow:auto;background:#fff;border-radius:28px;padding:22px 20px 18px;
+  transform:translateY(20px) scale(.96);opacity:0;transition:transform .25s cubic-bezier(.2,1.2,.4,1),opacity .2s}
+#modal.on .mbg{opacity:1}
+#modal.on .mbox{transform:none;opacity:1}
+.mbox h3{font-size:20px;font-weight:900;margin-bottom:6px}
+.mbox .mm{color:var(--ink2);font-size:14.5px;line-height:1.65;margin-bottom:14px}
+.mbox input[type=date]{width:100%;font:inherit;font-size:17px;border:2px solid #E6DFF6;border-radius:14px;padding:10px 12px;color:var(--ink);margin-bottom:14px}
+.mbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lvup{text-align:center;overflow:hidden}
+.lvup .rays{position:absolute;left:50%;top:92px;width:520px;height:520px;margin:-260px 0 0 -260px;z-index:0;
+  background:repeating-conic-gradient(from 0deg,rgba(255,200,61,.28) 0 10deg,rgba(255,200,61,0) 10deg 20deg);
+  border-radius:50%;animation:spin 12s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.lvup>*{position:relative;z-index:1}
+.lvup .mascot{margin:6px auto 4px}
+.lvup .lvn{font-size:15px;font-weight:900;color:var(--vio-d)}
+.lvup h3{font-size:24px}
+#toasts{position:fixed;left:0;right:0;top:12px;z-index:99;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none;padding:0 16px}
+.toast{max-width:420px;background:var(--ink);color:#fff;border-radius:18px;padding:10px 16px;font-size:14px;font-weight:700;line-height:1.5;
+  box-shadow:0 10px 24px -10px rgba(42,31,69,.6);animation:tin .3s cubic-bezier(.2,1.3,.4,1)}
+.toast.out{animation:tout .25s ease forwards}
+.toast.ach{display:flex;align-items:center;gap:10px;background:#fff;color:var(--ink);box-shadow:0 0 0 3px var(--lemon),0 12px 26px -10px rgba(42,31,69,.5)}
+.toast .tb{font-size:28px}
+.toast small{display:block;font-size:12.5px;color:var(--ink2);font-weight:700}
+@keyframes tin{from{opacity:0;transform:translateY(-14px) scale(.95)}to{opacity:1;transform:none}}
+@keyframes tout{to{opacity:0;transform:translateY(-10px)}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style></head>
+<body><div id="app"></div><canvas id="fx"></canvas><div id="toasts"></div><div id="modal" hidden></div>
+<script>'use strict';
+const D={"cards":[["绪论","马克思主义的三个基本组成部分","马克思主义哲学、政治经济学、科学社会主义","2025 年卷换了个问法：三者共同构成马克思主义理论体系的「主体内容」。"],["绪论","马克思主义公开问世的标志","1848 年《共产党宣言》发表","它同时是科学社会主义的第一个纲领性文件。"],["绪论","马克思主义的三大直接理论来源","德国古典哲学、英国古典政治经济学、英法空想社会主义","别和三大自然科学前提（细胞学说、能量守恒与转化、进化论）混。"],["绪论","马克思一生的两大发现","唯物史观和剩余价值学说","正是这两大发现，使社会主义从空想变成科学。"],["绪论","马克思主义的基本特征","科学性、人民性、实践性、发展性","一句话概括：科学性与革命性的统一。2025 年 10 月简答第 26 题。"],["绪论","马克思主义的革命性集中表现在","彻底的批判精神和鲜明的政治立场","选项里的「理论体系」「逻辑结构」是干扰项。"],["绪论","学习马克思主义的根本方法","理论联系实际","看到「根本方法」就选它。"],["唯物论","列宁的物质定义","物质是标志客观实在的哲学范畴","核心四个字：客观实在。"],["唯物论","物质的唯一特性","客观实在性","它是自然存在和社会存在的共同特性。"],["唯物论","意识的本质","意识是客观世界的主观映象","「人脑的产物」「物质的产物」只说了意识从哪来，没说它是什么。"],["唯物论","把意识说成「人脑的分泌物」","庸俗唯物主义","把精神直接等同于物质。"],["唯物论","世界的统一性问题，回答的是","万事万物有没有共同本质","唯物主义的回答：世界统一于物质。2026 年 4 月第 5 题。"],["唯物论","划分唯物主义和唯心主义的依据","物质和意识谁是本原","有没有同一性，划分的是可知论和不可知论。"],["唯物论","时间的一维性指","不可逆性","一去不返，只有一个方向。"],["辩证法","唯物辩证法的总观点和总特征","联系的观点和发展的观点","「总」字对应联系和发展。"],["辩证法","唯物辩证法的实质和核心","对立统一规律","「实质」「核心」对应对立统一，别和总特征对调。"],["辩证法","三大规律各揭示什么","对立统一：动力和源泉\n质量互变：状态和形式\n否定之否定：趋势和道路","动力、状态、趋势，一次背完。"],["辩证法","联系有哪些特点","客观性、普遍性、多样性、条件性","「整个世界是相互联系的统一整体」对应普遍性。2026 年 4 月第 6 题。"],["辩证法","「矛盾无处不在，矛盾无时不有」说的是","矛盾的普遍性","各有其特点，说的才是特殊性。"],["辩证法","马克思主义的活的灵魂","具体问题具体分析","也是分析矛盾特殊性的方法论要求。"],["辩证法","反映过去、现在和将来关系的范畴","现实和可能","本质和现象管深浅，原因和结果管前后。"],["辩证法","「世界怎样存在」划分的两种观点","辩证法和形而上学","「世界是什么」划分的是唯物论和唯心论。"],["辩证法","两点论和重点论怎样统一","两点是有重点的两点，重点是两点中的重点","2026 年 4 月论述第 31 题的核心句。"],["认识论","辩证唯物主义认识论：认识的本质","主体在实践基础上对客体的能动反映","两个关键词：实践基础、能动反映。"],["认识论","旧唯物主义认识论的两个缺陷","离开实践考察认识问题；离开辩证法考察认识问题","所以它只是消极的直观反映。2026 年 4 月第 7 题。"],["认识论","感性认识的三种形式","感觉 → 知觉 → 表象","都带着感官的味道。"],["认识论","理性认识的三种形式","概念 → 判断 → 推理","都是脑子里想出来的。2026 年 4 月第 8 题。"],["认识论","夸大感性认识 / 夸大理性认识","经验主义 / 教条主义","方向别搞反。"],["认识论","实践是检验真理唯一标准的原因","实践具有直接现实性","其他说法没错，但答非所问。"],["认识论","真理是什么","对客观事物及其规律的正确反映","真理是认识，不是规律本身。2026 年 4 月第 9 题。"],["认识论","真理和谬误的关系","既对立又统一，在一定条件下相互转化","在批判谬误中发展真理。2025 年 10 月简答第 27 题。"],["认识论","马克思主义哲学的精髓、党的思想路线的核心","实事求是","「精髓」「核心」都指向它。"],["唯物史观","社会历史观的基本问题","社会存在和社会意识的关系问题","哲学基本问题在社会领域的表现。"],["唯物史观","社会存在包括","物质资料生产方式、地理环境、人口因素","带「思想」二字的都属于社会意识。"],["唯物史观","对社会发展起决定作用的是","物质资料的生产方式","地理环境和人口只能影响、制约。2026 年 4 月第 10 题。"],["唯物史观","社会意识相对独立性的突出表现","对社会存在的能动反作用","另外两条：不完全同步性和不平衡性；历史继承性。"],["唯物史观","社会形态是什么的统一","经济基础和上层建筑的统一","「生产力和生产关系」是另一对，是陷阱。"],["唯物史观","整个上层建筑中居主导地位的","政治上层建筑","它的核心是国家政权。2026 年 4 月第 11 题。"],["唯物史观","衡量生产力水平的客观尺度","生产工具","最活跃的因素是劳动者，两个「最」别对调。"],["唯物史观","社会历史发展的基本动力","社会基本矛盾","阶级斗争、改革、科技革命都是动力，但不是「基本」动力。"],["唯物史观","承认必然性又承认主体选择","历史唯物主义","只认必然、否认选择是机械决定论。2026 年 4 月第 12 题。"],["政经","商品二因素和劳动二重性怎样对应","具体劳动创造使用价值\n抽象劳动形成价值","「创造」配使用价值，「形成」配价值。"],["政经","属于商品自然属性的因素","使用价值","价值是社会属性，反映人与人的关系。"],["政经","私有制商品经济的基本矛盾","私人劳动和社会劳动的矛盾","「二重性」是具体和抽象劳动，别混。"],["政经","价值量由什么决定？与劳动生产率什么关系","社会必要劳动时间决定；与劳动生产率成反比","与社会必要劳动时间成正比。"],["政经","货币最基本的两个职能","价值尺度和流通手段","其余三个是派生的。"],["政经","货币转化为资本的前提","劳动力成为商品","剩余价值理论的入口。"],["政经","资本主义生产方式的绝对规律","剩余价值规律","2026 年 4 月第 17 题。"],["政经","三种剩余价值怎样区分","延长工作日：绝对\n社会劳动生产率提高：相对\n个别企业效率更高：超额","关键看是「社会」还是「个别」。"],["政经","不变/可变资本、固定/流动资本的划分依据","前者按在价值增殖中的作用；后者按价值周转方式","同一台机器既是不变资本，又是固定资本。"],["政经","产业资本顺利循环的两个条件","三种职能形式空间上并存、时间上继起","空间并存，时间继起，别写反。2025 年 10 月简答第 28 题。"],["政经","生产价格等于","成本价格＋平均利润","它是商品价值的转化形式。"],["政经","平均利润率的分母","社会预付总资本","分母是可变资本的，是剩余价值率。"],["政经","经济危机周期的必经和基本阶段","危机阶段","四阶段：危机、萧条、复苏、高涨。"],["垄断","私人垄断资本主义形成的基础","生产集中和资本集中","「市场集中」「技术集中」都是干扰项。"],["垄断","垄断组织从松到紧","短期价格协定 → 卡特尔 → 辛迪加 → 托拉斯 → 康采恩 → 混合联合公司","最简单、最初级的是短期价格协定。"],["垄断","垄断利润的主要实现形式","垄断价格","卖时抬价，买时压价。"],["垄断","金融寡头怎样控制经济和国家","经济：参与制\n国家机器：同政府的「个人联合」","两个最容易对调。"],["垄断","资本输出按主体分、按形式分","主体：私人资本输出和国家资本输出\n形式：借贷资本输出和生产资本输出","2026 年 4 月第 22 题问的是主体。"],["垄断","二战后居主导地位的所有制形式","法人资本所有制","2025 年 10 月第 21 题。"],["垄断","经济全球化的主要表现","生产全球化、贸易全球化、金融全球化","只有三个。2025 年 10 月简答第 29 题。"],["科社","无产阶级夺取政权的第一次伟大尝试","巴黎公社","1871 年。尝试不等于成功。"],["科社","世界上第一个社会主义国家","苏维埃俄国","1917 年十月革命建立。"],["科社","展望未来社会：马克思主义与空想社会主义的根本区别","是否坚持科学的立场观点方法","马克思主义只揭示一般特征，不描绘细节。"],["科社","社会主义国家的最高政治领导力量","共产党","选项里的「社会党」是干扰项。"],["科社","最高理想和共同理想","最高理想：实现共产主义\n现阶段共同理想：建设中国特色社会主义","看到「最高」就是共产主义。"],["科社","共产主义社会的根本特征","实现人的自由而全面的发展","其余特征都对，但「根本」只有这一个。"],["科社","实现阶级消灭和国家消亡的社会","共产主义社会","社会主义阶段国家还存在。"],["科社","社会主义道路多样性的三条核心原因","生产力发展水平不同；历史文化传统不同；时代条件和国际环境不同","2026 年 4 月简答第 30 题。"]],"sq":[{"id":"a26","paper":"2025年10月","no":26,"type":"sa","max":6,"stem":"简述马克思主义的基本特征。","points":["科学性","人民性","实践性","发展性","科学性与革命性的统一"],"dis":["阶级性","民族性"],"full":"马克思主义具有鲜明的[[科学性]]、[[人民性]]、[[实践性]]、[[发展性]]，这些特征体现了马克思主义的本质和使命，也展现出马克思主义的理论形象。马克思主义的基本特征，用一句话来概括就是[[科学性与革命性的统一]]。","src":"参考答案，教材 P13","tip":"四个「性」背熟，最后补一句总括「科学性与革命性的统一」。"},{"id":"a27","paper":"2025年10月","no":27,"type":"sa","max":6,"stem":"如何理解真理和谬误的关系？","points":["既对立又统一","确定范围内对立是绝对的","真理可转化为谬误","谬误可转化为真理","在批判谬误中发展真理"],"dis":["真理与谬误没有界限","谬误永远不会变成真理"],"full":"它们之间[[既对立又统一]]。（1）二者相互对立。在确定的对象和范围内，真理与谬误的[[对立是绝对的]]，与对象相符合的认识就是真理，与对象不相符合的认识就是谬误。（2）二者的对立又是相对的，它们[[在一定条件下能够相互转化]]。①[[真理在一定条件下会转化为谬误]]：任何真理都只在一定范围内、一定条件下才能成立，超出这个范围，失去特定条件，就会变成谬误。②[[谬误在一定条件下能够向真理转化]]：勇于正视、反省、修正错误，终能让谬误转化为真理。③[[在批判谬误中发展真理]]，是谬误向真理转化的另一种形式。","src":"参考答案，教材 P98","tip":"先下结论「既对立又统一」，再分「对立」「转化」两层写，转化那层有三小点。"},{"id":"a28","paper":"2025年10月","no":28,"type":"sa","max":6,"stem":"简述产业资本的运动中，实现资本顺利循环必须具备的两个基本前提条件。","points":["三种职能形式在空间上并存","三种职能形式在时间上继起","按比例同时存在于三种形式","转化保持时间上的依次连续"],"dis":["三种职能形式在时间上并存","三种职能形式在空间上继起"],"full":"产业资本的运动，必须具备两个基本前提条件：一是产业资本的三种职能形式必须[[在空间上并存]]，也就是说，产业资本必须[[按照一定比例同时存在]]于货币资本、生产资本和商品资本三种形式中。二是产业资本的三种职能形式必须[[在时间上继起]]，也就是说，产业资本循环中三种职能形式的转化必须保持[[时间上的依次连续性]]。","src":"参考答案，教材 P220","tip":"口诀：空间并存，时间继起。最常见的丢分是把「空间」「时间」写反。"},{"id":"a29","paper":"2025年10月","no":29,"type":"sa","max":6,"stem":"经济全球化的内涵和主要表现是什么？","points":["各国经济相互联系、相互依赖的过程","生产全球化","贸易全球化","金融全球化"],"dis":["文化全球化","政治全球化"],"full":"（1）内涵：经济全球化是指在生产不断发展、科技加速进步、社会分工和国际分工不断深化、生产的社会化和国际化程度不断提高的情况下，世界各国、各地区的经济活动[[越来越超出一国和地区的范围]]而[[相互联系、相互依赖的过程]]。（2）主要表现：①[[生产全球化]]；②[[贸易全球化]]；③[[金融全球化]]。","src":"参考答案，教材 P256—P258","tip":"表现只有三个：生产、贸易、金融。内涵那句长，至少写出「超出一国范围、相互联系相互依赖的过程」。"},{"id":"a30","paper":"2025年10月","no":30,"type":"sa","max":6,"stem":"简述马克思主义经典作家预见未来社会的方法论原则。","points":["揭示社会发展一般规律，指明方向","剖析旧世界中阐发新世界特点","在社会主义发展中深化认识","只揭示一般特征，不描绘细节"],"dis":["详细设计未来社会的蓝图","从理性原则出发构想理想社会"],"full":"（1）在[[揭示人类社会发展一般规律]]的基础上指明社会发展的方向。（2）在[[剖析资本主义旧世界]]的过程中阐发未来新世界的特点。（3）在[[社会主义社会发展中不断深化]]对未来共产主义社会的认识。（4）立足于[[揭示未来社会的一般特征]]，而[[不对各种细节作具体描绘]]。","src":"参考答案，教材 P329","tip":"第四条是马克思主义和空想社会主义的分水岭，2026 年 4 月第 24 题选择题也考了它。"},{"id":"a31","paper":"2025年10月","no":31,"type":"lun","max":10,"stem":"试述矛盾的普遍性、矛盾的特殊性的含义以及分析矛盾的特殊性的意义。","points":["普遍性：无处不在、无时不有","特殊性：各有其特点","分析特殊性就是具体问题具体分析","是正确认识事物的基础","是正确解决矛盾的关键","马克思主义的活的灵魂"],"dis":["用一种方法解决一切矛盾","特殊性就是偶然性"],"full":"（1）[[矛盾的普遍性]]是指矛盾存在于一切事物中，存在于一切事物发展过程的始终，旧的矛盾解决了，又产生新的矛盾，事物始终在矛盾中运动。「[[矛盾无处不在，矛盾无时不有]]」就是对矛盾普遍性的形象表述。[[矛盾的特殊性]]是指各个具体事物的矛盾、每一个矛盾的各个方面在发展的不同阶段上[[各有其特点]]。矛盾的特殊性决定了事物的不同性质。\n（2）分析矛盾的特殊性就是坚持[[具体问题具体分析]]。一方面，分析矛盾的特殊性是[[正确认识事物的基础]]，只有这样才能把不同的事物区别开来。另一方面，分析矛盾的特殊性是[[正确解决矛盾的关键]]，不同的矛盾只能用不同的方法解决，即「一把钥匙开一把锁」。因此，具体问题具体分析是[[马克思主义的活的灵魂]]。","src":"参考答案","tip":"两段式：先写两个含义，再写意义。「基础」「关键」「活的灵魂」三个词一个都别漏。"},{"id":"a32","paper":"2025年10月","no":32,"type":"lun","max":10,"stem":"什么是社会意识？如何理解社会意识相对独立性的含义及表现？","points":["社会存在的反映、社会生活的精神方面","受社会存在决定，又有自身发展规律","不完全同步性和不平衡性","内部相互影响且有历史继承性","能动的反作用（突出表现）"],"dis":["社会意识决定社会存在","与社会存在完全同步变化"],"full":"（1）社会意识的含义：社会意识是[[社会存在的反映]]，是[[社会生活的精神方面]]。\n（2）相对独立性的含义：社会意识在从根本上[[受到社会存在决定]]的同时，还具有[[自身特有的发展形式和发展规律]]。\n（3）相对独立性的表现：①社会意识与社会存在发展具有[[不完全同步性和不平衡性]]；②社会意识内部各种形式之间[[存在相互影响且各自具有历史继承性]]；③社会意识对社会存在具有[[能动的反作用]]，这是社会意识相对独立性的[[突出表现]]。","src":"参考答案，教材 P129、P133","tip":"三层：是什么、相对独立性是什么、表现有哪些。「反作用」是突出表现，一定写。"},{"id":"a33","paper":"2025年10月","no":33,"type":"lun","max":10,"stem":"试述资本主义为社会主义所代替的历史必然性。","points":["基本矛盾包含一切冲突的萌芽","资本积累推动矛盾激化","国家垄断资本主义是社会主义的前奏","两大阶级的矛盾和斗争"],"dis":["资本主义可以自我完善","战后新变化改变了资本主义本质"],"full":"[[资本主义的内在矛盾]]决定了资本主义必然被社会主义所代替。（1）资本主义[[基本矛盾]]（生产社会化和生产资料资本主义私人占有之间的矛盾）「[[包含着现代的一切冲突的萌芽]]」。（2）[[资本积累]]推动资本主义基本矛盾不断激化并最终否定资本主义自身。（3）[[国家垄断资本主义]]是资本社会化的更高形式，将成为[[社会主义的前奏]]。（4）资本主义社会存在着[[资产阶级和无产阶级两大阶级]]之间的矛盾和斗争。","src":"参考答案，教材 P278","tip":"开头一句总论，下面四点。第 3 点的「前奏」最容易漏。"},{"id":"b26","paper":"2026年4月","no":26,"type":"sa","max":6,"stem":"什么是价值观？我国社会主义核心价值观的基本内容是什么？","points":["关于价值的根本观点和评价标准","富强、民主、文明、和谐","自由、平等、公正、法治","爱国、敬业、诚信、友善"],"dis":["勤劳、节俭、孝顺、谦让","团结、奋斗、创新、奉献"],"full":"价值观是人们[[关于价值的根本观点和评价标准]]。社会主义核心价值观的基本内容：国家层面——[[富强、民主、文明、和谐]]；社会层面——[[自由、平等、公正、法治]]；公民层面——[[爱国、敬业、诚信、友善]]。","src":"资料参考答案","tip":"十二个词按国家、社会、公民三层记，每层四个。"},{"id":"b27","paper":"2026年4月","no":27,"type":"sa","max":6,"stem":"简要说明社会存在与社会意识的含义及相互关系。","points":["社会存在：社会生活的物质方面","社会意识：社会生活的精神方面","社会存在决定社会意识","社会意识有相对独立性并反作用于社会存在"],"dis":["社会意识决定社会存在","二者互不影响、各自发展"],"full":"[[社会存在]]是[[社会生活的物质方面]]，包括物质资料生产方式、地理环境、人口因素。[[社会意识]]是[[社会生活的精神方面]]，包括社会心理和思想体系。相互关系：①[[社会存在决定社会意识]]；②社会意识对社会存在具有[[相对独立性]]，并能[[反作用于社会存在]]。","src":"资料参考答案","tip":"含义各一句；关系必须写两条，决定加反作用，只写「决定」会丢分。"},{"id":"b28","paper":"2026年4月","no":28,"type":"sa","max":6,"stem":"简述生产价格的形成过程。","points":["剩余价值转化为利润","利润转化为平均利润","成本价格＋平均利润＝生产价格","生产价格是商品价值的转化形式"],"dis":["价格转化为价值","平均利润转化为剩余价值"],"full":"①[[剩余价值转化为利润]]；②[[利润转化为平均利润]]；③[[成本价格与平均利润之和构成生产价格]]；④生产价格是[[商品价值的转化形式]]。","src":"资料参考答案","tip":"一条转化链，按顺序写：剩余价值 → 利润 → 平均利润 → 生产价格。"},{"id":"b29","paper":"2026年4月","no":29,"type":"sa","max":6,"stem":"第二次世界大战后资本主义发生了一系列新变化，其主要表现有哪些？这是否意味着资本主义本质的改变？","points":["生产资料所有制的变化","劳资关系和分配关系的变化","社会阶层和阶级结构的变化","经济调节机制和经济危机形态的变化","政治制度的变化","没有改变资本主义的本质"],"dis":["资本主义私有制已经消失","剥削关系已经不存在"],"full":"主要表现：①[[生产资料所有制的变化]]（国家资本所有制、法人资本所有制发展）；②[[劳资关系和分配关系的变化]]（职工参与决策、福利制度等）；③[[社会阶层和阶级结构的变化]]；④[[经济调节机制和经济危机形态的变化]]；⑤[[政治制度的变化]]。这些变化是在资本主义制度框架内的调整，[[没有改变资本主义的本质]]：私有制和剥削关系依然存在，[[基本矛盾没有消除]]。","src":"按教材章节整理（资料答案较简略）","tip":"先答「有哪些变化」，再答「是否改变本质」。第二问的结论必须写：没有改变。"},{"id":"b30","paper":"2026年4月","no":30,"type":"sa","max":6,"stem":"简述社会主义发展道路多样性的原因。","points":["各国生产力发展水平不同","历史文化传统不同","时代条件和国际环境不同","人民群众实践探索的创造性"],"dis":["社会主义的本质各不相同","马克思主义基本原理已经过时"],"full":"①各国[[生产力发展水平]]和经济社会发展状况不同；②[[历史文化传统]]存在差异；③所处的[[时代条件与国际环境]]不同；④[[人民群众的实践探索]]具有创造性；⑤马克思主义基本原理与各国实际[[相结合的路径]]不同。","src":"资料参考答案","tip":"前三条（生产力水平、历史文化、时代与国际环境）是核心，一定写；后两条有时间再补。"},{"id":"b31","paper":"2026年4月","no":31,"type":"lun","max":10,"stem":"把主要矛盾和次要矛盾、矛盾的主要方面和次要方面的辩证关系运用到实际工作中，就是要坚持「两点论」和「重点论」的统一。试述「两点论」和「重点论」统一的原理及其现实意义。","points":["两点论：兼顾主次矛盾和主次方面","重点论：着重把握主要矛盾和主要方面","两点是有重点的两点，重点是两点中的重点","正确认识和解决社会主要矛盾","工作中抓住关键环节","反对均衡论和一点论"],"dis":["只抓主要矛盾，其余不管","各方面平均用力"],"full":"原理：「[[两点论]]」是指看问题要[[兼顾主要矛盾和次要矛盾、矛盾的主要方面和次要方面]]；「[[重点论]]」是指在兼顾两点的前提下，[[着重把握主要矛盾和矛盾的主要方面]]；二者统一：[[两点是有重点的两点，重点是两点中的重点]]。\n现实意义：①正确认识和解决[[社会主要矛盾]]（如新时代人民日益增长的美好生活需要和不平衡不充分的发展之间的矛盾）；②指导经济、政治、文化等各领域工作，[[抓住关键环节]]；③[[反对均衡论和一点论]]，提高辩证思维能力；④在复杂局面中清醒判断主次，科学决策。","src":"资料参考答案","tip":"原理三句加意义三句，正好是论述题的两段式。"},{"id":"b32","paper":"2026年4月","no":32,"type":"lun","max":10,"stem":"试述商品经济中商品价值量的决定及其与劳动生产率的关系。","points":["由社会必要劳动时间决定","正常生产条件、平均熟练程度和劳动强度","单位商品价值量与劳动生产率成反比","单位时间创造的价值总量不变"],"dis":["价值量与劳动生产率成正比","价值量由个别劳动时间决定"],"full":"价值量的决定：商品的价值量由生产商品的[[社会必要劳动时间]]决定。社会必要劳动时间是在[[现有的社会正常的生产条件]]下，在[[社会平均的劳动熟练程度和劳动强度]]下，制造某种使用价值所需要的劳动时间。\n与劳动生产率的关系：①劳动生产率越高，[[单位商品的价值量越小]]，二者[[成反比]]；②单位时间内生产的使用价值量增加，但[[创造的价值总量不变]]；③个别企业提高劳动生产率可以获得超额剩余价值；④社会劳动生产率普遍提高，会使单位商品价值量下降。","src":"资料参考答案","tip":"第一段写清「社会必要劳动时间」的定义，第二段一句「成反比」再加解释。"},{"id":"b33","paper":"2026年4月","no":33,"type":"lun","max":10,"stem":"如何理解资本主义的历史进步性？其主要表现是什么？","points":["取代封建主义是历史的巨大进步","生产力空前发展","促进世界市场形成与经济全球化","推动民主法治等政治文明进步","为社会主义准备物质条件和社会力量"],"dis":["彻底消灭了剥削","实现了人的全面发展"],"full":"历史进步性：资本主义[[取代封建主义是历史的巨大进步]]。主要表现：①[[生产力空前发展]]：机械化、工业化、科技革命；②促进了[[世界市场的形成与经济全球化]]；③推动了[[民主、法治、自由等政治文明进步]]；④打破了封建等级制度，在一定程度上促进了人的解放；⑤为社会主义的产生准备了[[物质条件和社会力量]]（无产阶级）。","src":"资料参考答案","tip":"先一句定性，再列表现。最后一条「为社会主义准备条件」是点睛，别漏。"}],"e2025":[{"q":"在马克思主义理论体系中，马克思主义哲学、马克思主义政治经济学和科学社会主义共同构成其","o":["基本内涵","主要特征","根本性质","主体内容"],"a":3,"w":"马克思主义理论体系的主体内容由马克思主义哲学、马克思主义政治经济学和科学社会主义三部分构成。三者相互联系、有机统一，共同支撑起马克思主义的理论框架。","p":"P2"},{"q":"下列选项属于为马克思主义的创立提供了直接理论来源的是","o":["古希腊罗马哲学","文艺复兴运动的思想成果","德国古典哲学","法国复辟时期历史学家的进步思想"],"a":2,"w":"马克思主义的直接理论来源包括德国古典哲学、英国古典政治经济学和英法两国的空想社会主义。德国古典哲学（以黑格尔辩证法和费尔巴哈唯物主义为代表）为马克思主义哲学的创立提供了重要理论借鉴。","p":"P5"},{"q":"唯物主义和唯心主义是两种根本对立的哲学派别，其形成的原因在于","o":["二者对客观实在性的认识不同","二者对主观能动性的认识不同","二者对物质和意识谁为本源问题的回答不同","二者对思维和存在有否同一性问题的回答不同"],"a":2,"w":"唯物主义和唯心主义的根本分歧在于对物质和意识谁是世界本源问题的不同回答。唯物主义认为物质是本原，唯心主义认为意识是本原。","p":"P26"},{"q":"客观实在性作为物质的唯一特性，体现的是","o":["某种自然存在的个别特性","自然存在和社会存在的不同特性","几种自然存在的共同特性","自然存在和社会存在的共同特性"],"a":3,"w":"物质的唯一特性是客观实在性，这一特性既适用于自然领域的存在（如山川河流），也适用于社会领域的存在（如生产方式、社会关系），是二者的共同特性。","p":"P28-P29"},{"q":"马克思指出：“观念的东西不外是移入人脑并在人的头脑中改造过的物质的东西而已。”这就是说","o":["意识是人脑的分泌物","意识是客观世界的主观映象","意识是人脑的附属物","意识是客观世界的虚幻影像"],"a":1,"w":"马克思的这句话表明，意识的内容来源于客观物质世界，是人脑对客观事物的主观反映。意识并非人脑凭空产生，而是对物质的能动改造后的结果，既不是人脑的分泌物（庸俗唯物主义观点），也不是虚幻影像。","p":"P33"},{"q":"在唯物辩证法体系中，反映事物的过去、现在和将来关系的一对范畴是","o":["内容和形式","本质和现象","原因和结果","现实和可能"],"a":3,"w":"现实范畴反映事物当下的实际存在状态，可能范畴反映事物未来发展的潜在趋势，二者揭示了事物过去、现在与将来的联系。内容与形式反映事物的构成与表现方式，本质与现象反映事物的内在联系与外在表现，原因与结果反映事物的前后相继、引起与被引起关系。","p":"P54"},{"q":"“认识的本质是主体在实践基础上对客体的能动反映”，这是一种","o":["主观唯心主义认识论观点","客观唯心主义认识论观点","辩证唯物主义认识论观点","旧唯物主义认识论观点"],"a":2,"w":"辩证唯物主义认识论认为，认识的本质是主体在实践基础上对客体的能动反映，既强调实践的决定性作用，又承认认识的能动性。主观唯心主义认识论否认客观客体的存在，客观唯心主义认识论将认识归结为对绝对精神的把握，旧唯物主义认识论否认认识的能动性。","p":"P81-P82"},{"q":"轻视理性认识而片面夸大感性认识的作用，会导致实践中的","o":["实用主义","怀疑主义","教条主义","经验主义"],"a":3,"w":"经验主义片面夸大感性认识的作用，轻视理性认识的指导意义，认为只有感性经验才是可靠的认识来源。实用主义强调认识的实际效用，怀疑主义否认认识的可能性，教条主义片面夸大理性认识的作用，轻视感性经验。","p":"P87"},{"q":"实践是检验真理的唯一标准，这是因为","o":["实践是人类生存和发展的基础","实践是人类社会生活的本质","实践是真理和价值统一的基础","实践具有直接现实性的品质"],"a":3,"w":"实践之所以是检验真理的唯一标准，核心在于实践具有直接现实性——它能将主观认识转化为客观现实，通过实际结果验证认识是否符合客观规律。其他选项虽表述正确，但并非这一命题的根本原因。","p":"P101"},{"q":"中国共产党的思想路线的核心是","o":["自信自立","守正创新","实事求是","自我革命"],"a":2,"w":"中国共产党的思想路线是一切从实际出发，理论联系实际，实事求是，在实践中检验真理和发展真理。其中，实事求是是思想路线的核心。","p":"P117"},{"q":"社会历史观的基本问题是","o":["社会存在和社会意识的关系问题","物质文明和精神文明协调发展的问题","社会革命和社会改革的关系问题","群众、阶级、政党、领袖的关系问题"],"a":0,"w":"社会存在与社会意识的关系问题，是社会历史观的基本问题。正确认识社会存在与社会意识的关系，是科学把握人类社会发展规律的基础和前提。","p":"P126"},{"q":"社会存在即社会物质生活条件，是社会生活的物质方面。下列选项中不属于社会存在的是","o":["自然地理环境","政治法律思想","物质生产方式","人口因素"],"a":1,"w":"社会存在包括自然地理环境、人口因素和物质生产方式（生产力与生产关系的统一）。政治法律思想属于社会意识的范畴，是上层建筑的重要组成部分。","p":"P127"},{"q":"下列各项正确说明经济基础与上层建筑的关系的是","o":["经济基础的性质决定上层建筑的性质","上层建筑的性质决定经济基础的性质","上层建筑的变化决定经济基础的变化","上层建筑各个部分都随经济基础的变化而同步变化"],"a":0,"w":"经济基础与上层建筑的关系中，经济基础处于决定地位：经济基础的性质决定上层建筑的性质，经济基础的变化发展决定上层建筑的变化发展。上层建筑具有相对独立性，并非与经济基础同步变化，也不能决定经济基础。","p":"P142"},{"q":"从商品二因素与劳动二重性的关系考察商品经济中能够形成商品价值的劳动是","o":["具体劳动","体力劳动","抽象劳动","脑力劳动"],"a":2,"w":"商品二因素（使用价值和价值）对应劳动二重性（具体劳动和抽象劳动）。具体劳动创造商品的使用价值，抽象劳动（无差别的人类一般劳动）形成商品的价值。","p":"P189"},{"q":"下列关于商品价值量决定关系的表述中，正确的是","o":["商品的价值量与社会必要劳动时间成正比，与劳动生产率成反比","商品的价值量与社会必要劳动时间成反比，与劳动生产率成正比","商品的价值量与社会必要劳动时间成正比，与劳动生产率也成正比","商品的价值量与社会必要劳动时间成反比，与劳动生产率也成反比"],"a":0,"w":"商品的价值量由社会必要劳动时间决定，二者成正比——社会必要劳动时间越长，价值量越大。劳动生产率（单位时间内生产的商品数量）与价值量成反比——劳动生产率越高，单位商品耗费的社会必要劳动时间越少，价值量越小。","p":"P190"},{"q":"资本主义社会中，劳动力成为商品要具备的基础条件，不包括","o":["劳动者在法律上是自由人","劳动者人身依附于资本家","劳动者没有生活资料来源","劳动者没有任何生产资料"],"a":1,"w":"劳动力成为商品的两个基本条件：一是劳动者在法律上是自由人，能自主支配自己的劳动力；二是劳动者没有任何生产资料和生活资料，只能靠出卖劳动力为生。劳动者人身依附于资本家是封建制生产关系的特征，并非劳动力成为商品的条件。","p":"P208"},{"q":"资本主义社会经济危机会周期性爆发，但现实中资本主义的再生产周期不一定都要依次经过典型的四个阶段，其中有一个阶段是资本主义经济周期的必经阶段和基本阶段，这个阶段是","o":["危机阶段","萧条阶段","复苏阶段","高涨阶段"],"a":0,"w":"资本主义再生产周期包括危机、萧条、复苏、高涨四个阶段，其中危机阶段是必经阶段和基本阶段，是资本主义基本矛盾激化的集中表现，决定了周期的性质和进程。","p":"P228"},{"q":"资本主义国家政权采取分权制衡的组织形式，即三权分立制度，下列选项中不属于这“三权”的是","o":["监督权","司法权","行政权","立法权"],"a":0,"w":"三权分立制度中的“三权”指立法权、行政权和司法权，三者相互独立、相互制衡。监督权并非独立的“三权”之一，而是通过三权之间的制约关系实现的。","p":"P231"},{"q":"垄断资本主义形成于19世纪末20世纪初，由于这一时期的垄断资本主义主要以私人垄断资本为基础，因此又被称为","o":["私人垄断资本主义","垄断竞争资本主义","国家垄断资本主义","金融垄断资本主义"],"a":0,"w":"19世纪末20世纪初形成的垄断资本主义，以私人垄断资本为基础，称为私人垄断资本主义。国家垄断资本主义是二战后发展起来的，指国家政权与私人垄断资本相结合的垄断资本主义。","p":"P241"},{"q":"垄断资本主义国家的垄断组织虽然形式多种多样，但本质都是为了","o":["促进技术进步","获得垄断利润","控制销售市场","增加商品生产"],"a":1,"w":"垄断组织的形式（如卡特尔、辛迪加、托拉斯等）虽各不相同，但本质都是为了获取垄断利润——通过垄断价格（高于或低于生产价格的价格）实现的超额利润，是垄断资本主义的核心目标。","p":"P245"},{"q":"第二次世界大战后，资本主义生产资料所有制发生了新的变化，成为居主导地位的所有制形式是","o":["国家资本所有制","法人资本所有制","员工持股所有制","知识资本所有制"],"a":1,"w":"二战后，资本主义生产资料所有制发生新变化，法人资本所有制逐渐取代私人资本所有制，成为居主导地位的所有制形式。法人资本所有制是指法人股东（如企业法人、金融机构法人）控股的所有制形式。","p":"P262-P263"},{"q":"与通常意义上对金融资本概念的理解和使用不同，马克思主义政治经济学的金融资本概念有其独特内涵，它指的是垄断资本主义国家","o":["银行自有资本和借入资本的总和","银行和非银行金融机构资本的总和","资本市场上流通的所有货币资本的总和","工业垄断资本和银行垄断资本融合形成的垄断资本"],"a":3,"w":"马克思主义政治经济学中的金融资本，特指工业垄断资本和银行垄断资本在竞争中相互融合形成的新型垄断资本，并非泛指所有金融机构的资本或货币资本总和。","p":"P244"},{"q":"无产阶级夺取政权的第一次伟大尝试是","o":["第一国际成立","巴黎公社革命","第二国际成立","十月革命"],"a":1,"w":"1871年的巴黎公社革命，是无产阶级第一次尝试建立自己的国家政权，为无产阶级革命积累了宝贵经验。十月革命是人类历史上第一次胜利的社会主义革命，建立了第一个社会主义国家。","p":"P286"},{"q":"社会主义国家的最高政治领导力量是","o":["工会","社会党","共产党","共青团"],"a":2,"w":"社会主义国家的最高政治领导力量是共产党，这是由社会主义国家的性质和共产党的先进性决定的，是社会主义事业顺利发展的根本保证。","p":"P304"},{"q":"共产主义社会的根本特征是","o":["人与自然和谐共生","人们的精神境界极大提高","社会关系高度和谐","实现人的自由而全面的发展"],"a":3,"w":"共产主义社会的根本特征是实现人的自由而全面的发展。人与自然和谐共生、精神境界极大提高、社会关系高度和谐都是共产主义社会的重要特征，但并非根本特征。","p":"P339"}],"e2026":[["下列选项属于马克思主义基本组成部分的是",["马克思主义立场、观点和方法","马克思主义自然观、历史观和价值观","马克思主义物质观、实践观和发展观","马克思主义哲学、政治经济学和科学社会主义"],3,"三个基本组成部分：哲学、政治经济学、科学社会主义。其余三项是拼出来的相似组合，不是「组成部分」。"],["作为马克思主义公开问世标志的是",["“正义者同盟”改组","《共产党宣言》发表","欧洲革命爆发","《新莱茵报》创刊"],1,"1848 年《共产党宣言》发表，标志着马克思主义公开问世。"],["下列表述属于列宁的物质定义内容的是",["物质是标志客观实在的哲学范畴","物质与时间具有统一性","物质是与运动不可分割的","物质与空间具有统一性"],0,"定义的核心是「客观实在」。B、C、D 讲的是物质与运动、时空的关系，话没错，但不是定义。"],["下列选项正确揭示意识的本质的是",["意识是人脑的产物","意识是在劳动交往中发展的","意识是物质的产物","意识是客观世界的主观映象"],3,"本质＝客观世界的主观映象。A、C 只讲了意识从哪来，没讲意识是什么。"],["世界的统一性问题，是回答世界上的万事万物",["有没有共同特征的问题","有没有相同结构的问题","有没有共同本质的问题","有没有相同功能的问题"],2,"统一性问题问的是万事万物有没有共同本质。唯物主义的回答：世界统一于物质。"],["任何事物内部的各要素之间、任何事物和其他事物之间都是有联系的，整个世界是相互联系的统一整体。这表明",["联系具有客观性","联系具有普遍性","联系具有多样性","联系具有条件性"],1,"「任何……都有联系」「整个世界是统一整体」＝到处都有＝普遍性。"],["在认识的本质问题上，旧唯物主义认识论的缺陷有二，一个是离开辩证法考察认识问题，另一个是",["离开实践考察认识问题","没有坚持反映论的立场","离开主体考察认识问题","没有坚持先验论的立场"],0,"旧唯物主义两大缺陷：离开实践、离开辩证法，所以只能是消极的直观反映。它坚持了反映论，B 不对。"],["理性认识由低级向高级的发展表现为",["从感觉到知觉再到表象","从观察到联想再到猜测","从概念到判断再到推理","从分析到归纳再到假说"],2,"理性三形式：概念→判断→推理。A 是感性认识的三形式，专门放在这里等你混。"],["下列关于真理的说法中，正确的是",["真理是独立于主体意识的物质实体","真理是思维与它的先验形式相一致","真理是不以人的意志为转移的客观规律","真理是对客观事物及其规律的正确反映"],3,"真理是一种认识，是对规律的正确反映。C 把真理说成规律本身，混淆了认识和认识的对象。"],["对人类社会发展起决定作用的是",["富饶的自然资源","良好的生态环境","适度的人口数量","物质资料的生产方式"],3,"起决定作用的是物质资料的生产方式。自然环境、人口只能影响和制约。"],["在整个上层建筑中，居于主导地位的是",["政治法律思想","政治上层建筑","艺术和宗教","道德和哲学"],1,"政治上层建筑居主导地位，核心是国家政权。A、C、D 属于观念上层建筑。"],["承认社会形态更替的必然性的同时又承认主体选择的作用，这种观点属于",["历史唯心主义","机械决定论","历史唯物主义","诡辩论"],2,"必然性和主体选择都承认，是历史唯物主义。只认必然、否认选择的，是机械决定论。"],["关于个人在历史进程中的作用，唯物史观认为",["每个个体都是历史活动的参与者","历史人物的作用总是促进性的","个人在历史上的作用不存在差别","历史人物的作用不受规律制约"],0,"B、C、D 都带绝对化字眼（总是、不存在、不受），一眼可排除。"],["商品经济得以产生的社会历史条件，除了生产资料和劳动产品属于不同所有者之外，还有一个，即",["存在自然分工","存在社会分工","存在部落内部分工","存在部落间分工"],1,"两个条件：社会分工＋不同所有者。是「社会分工」，不是自然分工。"],["商品二因素中反映人与自然之间的物质关系、属于商品自然属性的因素，是商品的",["使用价值","交换价值","价值","价格"],0,"使用价值＝自然属性＝人与自然；价值＝社会属性＝人与人。"],["以私有制为基础的商品经济的基本矛盾是",["具体劳动和抽象劳动的矛盾","私人劳动和社会劳动的矛盾","个别劳动和一般劳动的矛盾","生产劳动和非生产劳动的矛盾"],1,"基本矛盾＝私人劳动和社会劳动。A 是劳动二重性，被放进来陪跑。"],["资本主义生产方式的绝对规律是",["资本主义的竞争规律","资本积累的一般规律","资本主义再生产周期规律","剩余价值规律"],3,"生产剩余价值是资本主义生产的目的和决定性动机，所以剩余价值规律是它的绝对规律。"],["从资本循环角度看，资本家工厂中已经进入仓库的产成品，属于产业资本循环中的",["货币资本形态","生产资本形态","商品资本形态","固定资本形态"],2,"三形态：货币资本→生产资本→商品资本。做好待卖的东西就是商品资本。D 是另一套分法里的词。"],["19世纪末20世纪初形成的垄断资本主义主要以私人垄断资本为基础。私人垄断资本主义形成的基础是",["生产集中和市场集中","生产集中和资本集中","资本集中和市场集中","技术集中和资本集中"],1,"固定搭配：生产集中和资本集中。"],["垄断是通过一定的垄断组织形式实现的。在一个或几个经济部门中占据垄断地位的大企业联合形成的垄断组织，形式多种多样且不断变化，其中最简单、初级的垄断组织形式是",["短期价格协定","长期价格协定","短期市场协定","长期市场协定"],0,"从松到紧：短期价格协定→卡特尔→辛迪加→托拉斯→康采恩→混合联合公司。最简单的是短期价格协定。"],["资本主义国家运用财政政策、货币政策等经济手段，对社会总供给和总需求进行调节，这种调节形式属于",["法律调节","政治调节","宏观调节","微观调节"],2,"财政政策、货币政策调节总供给和总需求，属于宏观调节。"],["垄断资本形成后会向世界范围扩展。从输出资本的主体来看，主要有",["借贷资本输出和商品资本输出","生产资本输出和商品资本输出","私人资本输出和国家资本输出","生产资本输出和借贷资本输出"],2,"按主体分：私人和国家；按形式分：借贷资本输出和生产资本输出。D 是按形式分的，题干问的是主体。"],["恩格斯在《在马克思墓前的讲话》中指出，马克思一生有两大发现。正是这两大发现为实现社会主义从空想到科学的飞跃奠定了坚实的理论基础。这两大发现是",["辩证唯物主义和历史唯物主义","唯物史观和剩余价值学说","劳动价值论和剩余价值学说","唯物论和辩证法"],1,"两大发现：唯物史观和剩余价值学说。"],["在展望未来社会的问题上，马克思主义与空想社会主义的根本区别是",["是否坚持科学的立场观点方法","是否对未来社会做详尽描述","是否反映无产阶级的愿望要求","是否批判了资本主义旧世界"],0,"根本区别在立场观点方法。B 也是二者的不同之处，但只是表现，不是根本。"],["共产党人的最高理想是",["建设社会主义","实现新民主主义","建设中国特色社会主义","实现共产主义"],3,"最高理想＝实现共产主义；现阶段的共同理想＝建设中国特色社会主义。"]],"bank":[{"k":"b-d1-0","day":"d1","topic":"绪论与唯物论","cls":"zhe","q":"马克思主义哲学的直接理论来源是","o":["古希腊罗马哲学","德国古典哲学","近代英国哲学","近代法国哲学"],"a":1,"w":"三大直接来源：德国古典哲学、英国古典政治经济学、英法空想社会主义。问哲学来源就选德国古典哲学。","s":"2022年4月·第1题"},{"k":"b-d1-1","day":"d1","topic":"绪论与唯物论","cls":"zhe","q":"细胞学说、能量守恒与转化、进化论三大发现，为马克思主义的产生提供了","o":["直接来源","阶级利益","自然科学基础","主观条件"],"a":2,"w":"自然科学三大发现是「自然科学前提」，不是「直接理论来源」。来源是哲学，前提是科学，别混。","s":"2023年4月·第1题"},{"k":"b-d1-2","day":"d1","topic":"绪论与唯物论","cls":"zhe","q":"马克思主义产生于19世纪","o":["40年代","50年代","60年代","70年代"],"a":0,"w":"19世纪40年代。记住锚点：1848年《共产党宣言》发表，所以只能是40年代。","s":"2021年10月·第1题"},{"k":"b-d1-3","day":"d1","topic":"绪论与唯物论","cls":"zhe","q":"下列各项集中表现马克思主义革命性的是","o":["科学的理论内涵","完备的理论体系","严密的逻辑结构","彻底的批判精神"],"a":3,"w":"革命性＝彻底的批判精神 + 鲜明的政治立场。科学性才讲理论体系、逻辑结构。","s":"2021年10月·第2题"},{"k":"b-d1-4","day":"d1","topic":"绪论与唯物论","cls":"zhe","q":"马克思主义的革命性集中表现为它具有彻底的批判精神，还表现为它具有","o":["完整的理论体系","严密的逻辑结构","鲜明的政治立场","崇高的社会理想"],"a":2,"w":"上一题的另一个问法：题干已经给了「批判精神」，要补的就是「鲜明的政治立场」。","s":"2023年10月·第2题"},{"k":"b-d1-5","day":"d1","topic":"绪论与唯物论","cls":"zhe","q":"学习马克思主义的根本方法是","o":["理论联系实际","更新思想观念","熟读经典著作","了解党的文献"],"a":0,"w":"「根本方法」四个字只对应理论联系实际，这是固定搭配，简答题也考。","s":"2022年4月·第2题"},{"k":"b-d1-6","day":"d1","topic":"绪论与唯物论","cls":"zhe","q":"世界观是人们","o":["对自然界的根本看法和根本观点","对人类社会的根本看法和根本观点","对精神世界的根本看法和根本观点","对整个世界的根本看法和观点"],"a":3,"w":"世界观管的是「整个世界」。A、B、C 都把范围缩小了——这就是典型的缩小范围型干扰项。","s":"2023年4月·第3题"},{"k":"b-d1-7","day":"d1","topic":"绪论与唯物论","cls":"zhe","q":"唯物主义和唯心主义是两种根本对立的哲学派别，其形成的原因在于","o":["二者对客观实在性的认识不同","二者对主观能动性的认识不同","二者对物质和意识谁为本源问题的回答不同","二者对思维和存在有否同一性问题的回答不同"],"a":2,"w":"分唯物唯心，看本原问题；分可知论不可知论，看同一性问题。D 是另一道题的答案。","s":"2025年10月·第3题"},{"k":"b-d1-8","day":"d1","topic":"绪论与唯物论","cls":"zhe","q":"客观实在性作为物质的唯一特性，体现的是","o":["某种自然存在的个别特性","自然存在和社会存在的不同特性","几种自然存在的共同特性","自然存在和社会存在的共同特性"],"a":3,"w":"「唯一特性」意味着它必须涵盖一切存在——自然的和社会的都算，所以是二者的共同特性。","s":"2025年10月·第4题"},{"k":"b-d1-9","day":"d1","topic":"绪论与唯物论","cls":"zhe","q":"马克思指出：“观念的东西不外是移入人脑并在人的头脑中改造过的物质的东西而已。”这就是说","o":["意识是人脑的分泌物","意识是客观世界的主观映象","意识是人脑的附属物","意识是客观世界的虚幻影像"],"a":1,"w":"标准表述就是「客观世界的主观映象」。A 是庸俗唯物主义，D 是唯心主义，都是错的。","s":"2025年10月·第5题"},{"k":"b-d1-10","day":"d1","topic":"绪论与唯物论","cls":"zhe","q":"把意识说成是人脑的分泌物，这是一种","o":["庸俗唯物主义的观点","朴素唯物主义的观点","形而上学唯物主义的观点","辩证唯物主义的观点"],"a":0,"w":"「分泌物」把意识当成了物质本身，这是庸俗唯物主义的标志性说法，见到就选它。","s":"2020年10月·第6题"},{"k":"b-d1-11","day":"d1","topic":"绪论与唯物论","cls":"zhe","q":"时间的一维性指的是时间的","o":["绝对性","无限性","持续性","不可逆性"],"a":3,"w":"一维＝只有一个方向＝一去不返＝不可逆性。C「持续性」是时间的另一个含义，不是「一维性」。","s":"2023年10月·第4题"},{"k":"b-d2-0","day":"d2","topic":"辩证法与哲学派别","cls":"zhe","q":"联系的观点和发展的观点是","o":["马克思主义的理论品质","唯物辩证法的总观点和总特征","马克思主义的活的灵魂","唯物辩证法的实质和核心"],"a":1,"w":"总观点、总特征＝联系和发展；实质、核心＝对立统一规律。D 就是等你换错的那个坑。","s":"2023年10月·第5题"},{"k":"b-d2-1","day":"d2","topic":"辩证法与哲学派别","cls":"zhe","q":"唯物辩证法是关于自然、社会和思维联系与发展一般规律的科学。其中，否定之否定规律揭示的是事物发展的","o":["前提和条件","状态和形式","动力和源泉","趋势和道路"],"a":3,"w":"三条口诀：对立统一＝动力和源泉，质量互变＝状态和形式，否定之否定＝趋势和道路。","s":"2022年4月·第5题"},{"k":"b-d2-2","day":"d2","topic":"辩证法与哲学派别","cls":"zhe","q":"“矛盾无处不在，矛盾无时不有。”这句话说的是","o":["矛盾具有特殊性","矛盾具有普遍性","矛盾具有同一性","矛盾具有斗争性"],"a":1,"w":"「无处不在、无时不有」＝到处都有＝普遍性。特殊性讲的是各有各的不同。","s":"2023年4月·第5题"},{"k":"b-d2-3","day":"d2","topic":"辩证法与哲学派别","cls":"zhe","q":"分析矛盾的特殊性就是","o":["坚持“两点论”","坚持理论联系实际","坚持“重点论”","坚持具体问题具体分析"],"a":3,"w":"特殊性对应的方法论固定是「具体问题具体分析」，这是马克思主义活的灵魂。","s":"2021年4月·第5题"},{"k":"b-d2-4","day":"d2","topic":"辩证法与哲学派别","cls":"zhe","q":"在唯物辩证法体系中，反映事物的过去、现在和将来关系的一对范畴是","o":["内容和形式","本质和现象","原因和结果","现实和可能"],"a":3,"w":"五对范畴各管一件事：现实和可能管时间上的「现在与将来」，原因和结果管「前后相继」。看到「将来」就选现实和可能。","s":"2025年10月·第6题"},{"k":"b-d2-5","day":"d2","topic":"辩证法与哲学派别","cls":"zhe","q":"下列唯物辩证法范畴中反映事物根本性质和表面特征关系的是","o":["内容和形式","必然和偶然","本质和现象","可能性与现实性"],"a":2,"w":"「根本性质」对本质，「表面特征」对现象。内容和形式讲的是构成与表现方式，不是深浅。","s":"2021年10月·第4题"},{"k":"b-d2-6","day":"d2","topic":"辩证法与哲学派别","cls":"zhe","q":"假象同真象一样，也是客观存在的。这是一种","o":["唯物辩证法的观点","形而上学的观点","折衷主义的观点","诡辩论的观点"],"a":0,"w":"假象也是本质的一种表现，是客观的，不是人主观造出来的——这正是唯物辩证法的立场。","s":"2021年4月·第6题"},{"k":"b-d2-7","day":"d2","topic":"辩证法与哲学派别","cls":"zhe","q":"在世界如何存在的问题上，两种根本对立的观点是","o":["唯物与唯心","辩证法和形而上学","一元和二元","可知与不可知"],"a":1,"w":"「世界是什么」分唯物唯心；「世界怎么存在」分辩证法和形而上学。抓住题干问的是「如何存在」。","s":"2021年10月·第3题"},{"k":"b-d2-8","day":"d2","topic":"辩证法与哲学派别","cls":"zhe","q":"把世界的本质或本原归结为某一种或某几种具体的物质形态，这种观点属于","o":["古代朴素唯物主义","庸俗唯物主义","形而上学唯物主义","辩证唯物主义"],"a":0,"w":"水、火、气这类「具体物质形态」是古代朴素唯物主义的标志。形而上学唯物主义归结为原子。","s":"2023年4月·第4题"},{"k":"b-d2-9","day":"d2","topic":"辩证法与哲学派别","cls":"zhe","q":"承认世界具有统一性的哲学就是","o":["唯物论","辩证法","一元论","可知论"],"a":2,"w":"一元论＝承认世界有统一的本原。至于本原是物质还是精神，那是唯物唯心的分歧，是下一层。","s":"2021年4月·第3题"},{"k":"b-d2-10","day":"d2","topic":"辩证法与哲学派别","cls":"zhe","q":"在一元论上，唯物主义与唯心主义的共同点是承认世界的","o":["同一性","可知性","统一性","物质性"],"a":2,"w":"唯心主义一元论也承认世界有统一本原，只是认为那个本原是精神。共同点是「统一性」，不是「物质性」。","s":"2023年4月·第2题"},{"k":"b-d2-11","day":"d2","topic":"辩证法与哲学派别","cls":"zhe","q":"与自然规律相比，社会规律","o":["不具有客观性","是通过各种盲目力量实现的","不具有普遍性","是通过人的自觉活动实现的"],"a":3,"w":"社会规律照样客观、普遍，唯一的不同是它必须通过人的自觉活动才实现。凡是说社会规律「不客观」的都是错的。","s":"2020年10月·第5题"},{"k":"b-d3-0","day":"d3","topic":"认识论与真理","cls":"zhe","q":"唯物主义一元论与唯心主义一元论的区别在于是否承认","o":["世界万物的本原只有一个","世界万物的本原是物质","检验真理的标准只有一个","检验真理的标准是实践"],"a":1,"w":"两者都承认本原只有一个（都是一元论），区别在于那个本原是不是物质。A 是它们的共同点，不是区别。","s":"2023年10月·第3题"},{"k":"b-d3-1","day":"d3","topic":"认识论与真理","cls":"zhe","q":"“认识的本质是主体在实践基础上对客体的能动反映”，这是一种","o":["主观唯心主义认识论观点","客观唯心主义认识论观点","辩证唯物主义认识论观点","旧唯物主义认识论观点"],"a":2,"w":"两个关键词：实践基础 + 能动反映。旧唯物主义只承认反映不承认能动，也不讲实践。","s":"2025年10月·第7题"},{"k":"b-d3-2","day":"d3","topic":"认识论与真理","cls":"zhe","q":"认识是主体对客体的能动反映，这是一种","o":["机械唯物主义认识论观点","辩证唯物主义认识论观点","主观唯心主义认识论观点","客观唯心主义认识论观点"],"a":1,"w":"只要出现「能动反映」四个字，答案就是辩证唯物主义。机械（旧）唯物主义对应的是「直观反映」。","s":"2023年4月·第7题"},{"k":"b-d3-3","day":"d3","topic":"认识论与真理","cls":"zhe","q":"下列各项属于辩证唯物主义观点的是","o":["认识是从天上掉下来的","认识是主体对客体的直观反映","认识是人脑主观自生的","认识是主体对客体的能动反映"],"a":3,"w":"四个选项刚好是四种立场：A 客观唯心，B 旧唯物，C 主观唯心，D 辩证唯物。记住这张四象限表，这类题全送分。","s":"2023年10月·第7题"},{"k":"b-d3-4","day":"d3","topic":"认识论与真理","cls":"zhe","q":"感性认识与理性认识的区别在于","o":["前者是主观的，后者是客观的","前者源于实践，后者源于内省","前者是抽象的思维，后者是生动的直观","前者反映事物现象，后者揭示事物本质"],"a":3,"w":"感性看表面现象，理性抓内在本质。C 把两者说反了，是常见倒置型干扰项。","s":"2023年4月·第8题"},{"k":"b-d3-5","day":"d3","topic":"认识论与真理","cls":"zhe","q":"理性认识的三种形式是","o":["感觉、概念、判断","概念、判断、推理","感觉、知觉、表象","感觉、知觉、推理"],"a":1,"w":"感性三形式：感觉→知觉→表象；理性三形式：概念→判断→推理。六个词分两组，顺序也要对。","s":"2022年4月·第8题"},{"k":"b-d3-6","day":"d3","topic":"认识论与真理","cls":"zhe","q":"轻视理性认识而片面夸大感性认识的作用，会导致实践中的","o":["实用主义","怀疑主义","教条主义","经验主义"],"a":3,"w":"夸大感性＝经验主义，夸大理性＝教条主义。一句话记：只信经验的是经验主义。","s":"2025年10月·第8题"},{"k":"b-d3-7","day":"d3","topic":"认识论与真理","cls":"zhe","q":"哲学史上的唯理论和经验论的错误在于","o":["割裂了感性认识和理性认识的联系","颠倒了直接经验和间接经验的关系","混淆了正确认识和错误认识的区别","模糊了绝对真理和相对真理的界限"],"a":0,"w":"唯理论只要理性，经验论只要感性，共同毛病是把两者割裂开。","s":"2023年10月·第8题"},{"k":"b-d3-8","day":"d3","topic":"认识论与真理","cls":"zhe","q":"实践是检验真理的唯一标准，这是因为","o":["实践是人类生存和发展的基础","实践是人类社会生活的本质","实践是真理和价值统一的基础","实践具有直接现实性的品质"],"a":3,"w":"问「为什么能当标准」，答案只能是「直接现实性」——它能把想法变成看得见的结果。其余三项本身没错，但答非所问。","s":"2025年10月·第9题"},{"k":"b-d3-9","day":"d3","topic":"认识论与真理","cls":"zhe","q":"在真理的检验标准问题上，下列各项中说法正确的是","o":["多数人认可的就是真理","个人觉得有用的就是真理","少数人坚持的就是真理","在实践中证实的才是真理"],"a":3,"w":"凡是把标准放在「人怎么想」上的选项都错。标准只有一个：实践。","s":"2018年10月·第9题"},{"k":"b-d3-10","day":"d3","topic":"认识论与真理","cls":"zhe","q":"在检验认识真理性的问题上，下列各项正确说明实践标准与逻辑证明关系的是","o":["实践标准具有绝对性，无需逻辑证明补充","实践标准具有相对性，必须逻辑证明补充","被逻辑证明了的认识，最终还要用实践来检验","逻辑证明可以取代实践成为检验真理的标准"],"a":2,"w":"逻辑证明是辅助，不能取代实践；实践才有最后的权威。A 太绝对，D 直接错。","s":"2023年4月·第9题"},{"k":"b-d3-11","day":"d3","topic":"认识论与真理","cls":"zhe","q":"被称为马克思主义哲学的精髓、党的思想路线的核心的是","o":["一切从实际出发","理论联系实际","解放思想","实事求是"],"a":3,"w":"「精髓」「核心」这两个词只对应实事求是。思想路线一共四句，核心那句就是它。","s":"2023年10月·第9题"},{"k":"b-d4-0","day":"d4","topic":"唯物史观","cls":"zhe","q":"社会历史观的基本问题是","o":["社会存在和社会意识的关系问题","物质文明和精神文明协调发展的问题","社会革命和社会改革的关系问题","群众、阶级、政党、领袖的关系问题"],"a":0,"w":"哲学基本问题是思维和存在的关系，搬到社会上就是社会存在和社会意识的关系。这是唯物史观的入口。","s":"2025年10月·第11题"},{"k":"b-d4-1","day":"d4","topic":"唯物史观","cls":"zhe","q":"对社会存在和社会意识关系问题的不同回答是","o":["划分唯物主义和唯心主义的标准","划分可知论和不可知论的标准","划分唯物史观和唯心史观的标准","划分辩证法和形而上学的标准"],"a":2,"w":"注意题干说的是「社会」存在和「社会」意识，所以划分的是史观，不是一般的唯物唯心。A 就是没看清「社会」两个字的人会选的。","s":"2022年4月·第10题"},{"k":"b-d4-2","day":"d4","topic":"唯物史观","cls":"zhe","q":"社会存在即社会物质生活条件，是社会生活的物质方面。下列选项中不属于社会存在的是","o":["自然地理环境","政治法律思想","物质生产方式","人口因素"],"a":1,"w":"社会存在三样：地理环境、人口因素、物质生产方式。政治法律思想是社会意识，属于上层建筑。","s":"2025年10月·第12题"},{"k":"b-d4-3","day":"d4","topic":"唯物史观","cls":"zhe","q":"地理环境在社会发展中的作用表现为","o":["它决定社会制度的性质","它影响和制约社会的发展","它决定社会形态的更替","它决定社会生产力的水平"],"a":1,"w":"地理环境和人口因素都只能「影响制约」，不能「决定」。凡是让它们「决定」什么的选项一律排除。","s":"2023年4月·第10题"},{"k":"b-d4-4","day":"d4","topic":"唯物史观","cls":"zhe","q":"人口因素在社会发展中的作用表现为","o":["影响社会阶层的划分","影响社会发展的速度","决定社会制度的性质","决定社会形态的更替"],"a":1,"w":"同一条规则：人口只能影响快慢，不能决定性质。真正起决定作用的是物质生产方式。","s":"2023年10月·第10题"},{"k":"b-d4-5","day":"d4","topic":"唯物史观","cls":"zhe","q":"在现代生产力系统中，劳动者、劳动资料和劳动对象属于","o":["准备性因素","运筹性因素","实体性因素","渗透性因素"],"a":2,"w":"看得见摸得着的三样是实体性因素；科学技术是渗透性因素，教育是准备性因素，管理是运筹性因素。","s":"2023年10月·第11题"},{"k":"b-d4-6","day":"d4","topic":"唯物史观","cls":"zhe","q":"衡量生产力水平的客观尺度是","o":["生产工具的状况","劳动对象的广度","劳动产品的数量","劳动产品的质量"],"a":0,"w":"生产工具是尺度，劳动者是最活跃的因素。这两个「最」经常一起考，别对调。","s":"2022年4月·第11题"},{"k":"b-d4-7","day":"d4","topic":"唯物史观","cls":"zhe","q":"下列各项正确说明经济基础与上层建筑关系的是","o":["经济基础的性质决定上层建筑的性质","上层建筑的性质决定经济基础的性质","上层建筑的变化决定经济基础的变化","上层建筑各个部分都随经济基础的变化而同步变化"],"a":0,"w":"经济基础决定上层建筑，上层建筑只能反作用。D 错在「同步」——上层建筑有相对独立性，会滞后。","s":"2025年10月·第13题"},{"k":"b-d4-8","day":"d4","topic":"唯物史观","cls":"zhe","q":"在经济基础和上层建筑这对矛盾当中","o":["经济基础是矛盾的主要方面","经济基础应上层建筑的需要产生","上层建筑是矛盾的主要方面","上层建筑是经济基础的物质根源"],"a":0,"w":"谁起决定作用谁就是矛盾的主要方面。这里是经济基础。","s":"2023年4月·第11题"},{"k":"b-d4-9","day":"d4","topic":"唯物史观","cls":"zhe","q":"社会形态是","o":["自然界与人类社会的统一","地理环境与人口因素的统一","生产力与生产关系的统一","经济基础与上层建筑的统一"],"a":3,"w":"社会形态＝经济基础＋上层建筑。C 说的是另一对关系，看着顺眼但不是答案。","s":"2023年10月·第12题"},{"k":"b-d4-10","day":"d4","topic":"唯物史观","cls":"zhe","q":"社会历史发展的动力是多方面的，其中作为基本动力的是","o":["社会基本矛盾","阶级斗争","科学技术革命","社会改革"],"a":0,"w":"B、C、D 都是动力，但只有社会基本矛盾是「基本」动力。题干里的限定词决定答案。","s":"2023年10月·第13题"},{"k":"b-d4-11","day":"d4","topic":"唯物史观","cls":"zhe","q":"人的本质在于","o":["人的道德素质","人的法治素养","人的自然属性","人的社会属性"],"a":3,"w":"人的本质是一切社会关系的总和，所以在于社会属性而非自然属性。","s":"2023年4月·第12题"},{"k":"b-d5-0","day":"d5","topic":"商品与价值","cls":"jing","q":"商品经济产生和存在的决定性条件是","o":["商品生产","商品交换","社会分工","生产资料和劳动产品属于不同的所有者"],"a":3,"w":"两个条件：社会分工是一般条件，不同所有者是决定性条件。问「决定性」就选后者。","s":"2023年4月·第14题"},{"k":"b-d5-1","day":"d5","topic":"商品与价值","cls":"jing","q":"商品经济得以产生的社会历史条件，除了生产资料和劳动产品属于不同所有者之外，还有一个，即","o":["存在自然分工","存在社会分工","存在部落内部分工","存在部落间分工"],"a":1,"w":"上一题的补位问法：另一个条件是社会分工。注意是「社会分工」，不是自然分工。","s":"2026年4月·第14题"},{"k":"b-d5-2","day":"d5","topic":"商品与价值","cls":"jing","q":"商品二因素中反映人与自然之间的物质关系、属于商品自然属性的因素，是商品的","o":["使用价值","交换价值","价值","价格"],"a":0,"w":"使用价值＝自然属性＝人与自然；价值＝社会属性＝人与人。这条线是整块政经的基准线。","s":"2026年4月·第15题"},{"k":"b-d5-3","day":"d5","topic":"商品与价值","cls":"jing","q":"以下关于商品使用价值的表述中不正确的是","o":["使用价值是价值的物质承担者","使用价值是商品的自然属性","同一物品只能有一种使用价值","没有使用价值的物品不可能有价值"],"a":2,"w":"本题问「不正确」，别看反。一块铁可以打刀也可以做锅，使用价值是多方面的，所以 C 错。","s":"2022年4月·第15题"},{"k":"b-d5-4","day":"d5","topic":"商品与价值","cls":"jing","q":"在商品经济中，生产商品的劳动具有二重性，这里的劳动二重性是指","o":["具体劳动和抽象劳动","活劳动和物化劳动","体力劳动和脑力劳动","私人劳动和社会劳动"],"a":0,"w":"二重性＝具体劳动＋抽象劳动。D 是「基本矛盾」，被放进来当陪跑，这是最高频的一个坑。","s":"2023年10月·第14题"},{"k":"b-d5-5","day":"d5","topic":"商品与价值","cls":"jing","q":"从商品二因素与劳动二重性的关系考察，商品经济中能够形成商品价值的劳动是","o":["具体劳动","体力劳动","抽象劳动","脑力劳动"],"a":2,"w":"具体劳动创造使用价值，抽象劳动形成价值。「创造」配使用价值，「形成」配价值，连动词都是固定的。","s":"2025年10月·第14题"},{"k":"b-d5-6","day":"d5","topic":"商品与价值","cls":"jing","q":"决定商品价值量的是","o":["物化劳动时间","活劳动时间","个别劳动时间","社会必要劳动时间"],"a":3,"w":"永远是社会必要劳动时间。个别劳动时间只影响这一家企业赚多赚少，不决定价值量。","s":"2023年4月·第15题"},{"k":"b-d5-7","day":"d5","topic":"商品与价值","cls":"jing","q":"单位商品的价值量与生产该商品的劳动生产率","o":["成正比","成反比","同比例变化","没有关系"],"a":1,"w":"效率越高，一件东西花的社会必要劳动时间越少，价值量越小——所以成反比。","s":"2021年4月·第14题"},{"k":"b-d5-8","day":"d5","topic":"商品与价值","cls":"jing","q":"下列关于商品价值量决定关系的表述中，正确的是","o":["商品的价值量与社会必要劳动时间成正比，与劳动生产率成反比","商品的价值量与社会必要劳动时间成反比，与劳动生产率成正比","商品的价值量与社会必要劳动时间成正比，与劳动生产率也成正比","商品的价值量与社会必要劳动时间成反比，与劳动生产率也成反比"],"a":0,"w":"一正一反：跟时间成正比，跟生产率成反比。这两句要一起背，考试常合在一个选项里。","s":"2025年10月·第15题"},{"k":"b-d5-9","day":"d5","topic":"商品与价值","cls":"jing","q":"简单商品经济的基本矛盾是指","o":["价值和使用价值的矛盾","价值和交换价值的矛盾","私人劳动和社会劳动的矛盾","具体劳动和抽象劳动的矛盾"],"a":2,"w":"基本矛盾只有一个答案：私人劳动和社会劳动。A、D 是另外两组「二」，专门用来干扰。","s":"2018年10月·第14题"},{"k":"b-d5-10","day":"d5","topic":"商品与价值","cls":"jing","q":"以私有制为基础的商品经济的基本矛盾是","o":["具体劳动和抽象劳动的矛盾","私人劳动和社会劳动的矛盾","个别劳动和一般劳动的矛盾","生产劳动和非生产劳动的矛盾"],"a":1,"w":"「简单商品经济」和「以私有制为基础的商品经济」说的是同一件事，答案也一样。","s":"2026年4月·第16题"},{"k":"b-d5-11","day":"d5","topic":"商品与价值","cls":"jing","q":"货币的五种职能中最基本的是","o":["世界货币和贮藏手段","贮藏手段和支付手段","价值尺度和流通手段","价值尺度和价格标准"],"a":2,"w":"五种职能里最基本的两个是价值尺度和流通手段，其余三个都是派生出来的。","s":"2020年10月·第14题"},{"k":"b-d6-0","day":"d6","topic":"剩余价值与资本","cls":"jing","q":"货币转化为资本的前提是","o":["资本完成原始积累","商品生产者出现两极分化","劳动力成为商品","劳动者有人身自由"],"a":2,"w":"整个剩余价值理论的入口。D 只是劳动力成为商品的条件之一，不是那个「前提」本身。","s":"2022年4月·第16题"},{"k":"b-d6-1","day":"d6","topic":"剩余价值与资本","cls":"jing","q":"资本主义社会中，劳动力成为商品要具备的基础条件，不包括","o":["劳动者在法律上是自由人","劳动者人身依附于资本家","劳动者没有生活资料来源","劳动者没有任何生产资料"],"a":1,"w":"问「不包括」。劳动力成为商品恰恰要求劳动者人身自由，人身依附是封建关系，正好相反。","s":"2025年10月·第16题"},{"k":"b-d6-2","day":"d6","topic":"剩余价值与资本","cls":"jing","q":"必要劳动时间不变，通过工作日的延长而生产的剩余价值是","o":["绝对剩余价值","相对剩余价值","超额剩余价值","平均剩余价值"],"a":0,"w":"判别关键词：延长工作日＝绝对；缩短必要劳动时间＝相对；个别企业效率高＝超额。","s":"2022年4月·第17题"},{"k":"b-d6-3","day":"d6","topic":"剩余价值与资本","cls":"jing","q":"相对剩余价值生产的条件是","o":["社会劳动生产率提高","个别企业劳动生产率提高","社会劳动生产率不变","部分生产部门的劳动生产率提高"],"a":0,"w":"相对剩余价值靠的是全社会效率提高；个别企业效率提高得到的是超额剩余价值。「社会」还是「个别」是分界线。","s":"2021年10月·第16题"},{"k":"b-d6-4","day":"d6","topic":"剩余价值与资本","cls":"jing","q":"个别企业由于劳动生产率更高，从而使商品个别价值低于社会价值所获得的剩余价值是","o":["绝对剩余价值","相对剩余价值","超额剩余价值","平均剩余价值"],"a":2,"w":"个别价值低于社会价值＝超额剩余价值。凡是题干出现「个别企业」「率先采用新技术」，答案都是它。","s":"2023年4月·第16题"},{"k":"b-d6-5","day":"d6","topic":"剩余价值与资本","cls":"jing","q":"剩余价值率反映的是","o":["不变资本的增殖程度","资本家对工人的剥削程度","固定资本的增殖程度","流动资本的增殖程度"],"a":1,"w":"剩余价值率＝剩余价值÷可变资本，衡量的是剥削程度；利润率才衡量增殖程度。","s":"2020年10月·第15题"},{"k":"b-d6-6","day":"d6","topic":"剩余价值与资本","cls":"jing","q":"从资本循环周转的角度考察，资本家用于购买机器设备的资本属于","o":["可变资本","不变资本","流动资本","固定资本"],"a":3,"w":"题干说「从资本循环周转的角度」，那就用固定/流动这套分法，答固定资本。如果问的是增殖作用，才答不变资本。同一台机器两个身份，看题干用哪把尺子。","s":"2023年10月·第16题"},{"k":"b-d6-7","day":"d6","topic":"剩余价值与资本","cls":"jing","q":"从资本循环角度看，资本家工厂中已经进入仓库的产成品，属于产业资本循环中的","o":["货币资本形态","生产资本形态","商品资本形态","固定资本形态"],"a":2,"w":"产业资本循环三形态：货币资本→生产资本→商品资本。做好待卖的东西就是商品资本。D 又是另一套分法的干扰项。","s":"2026年4月·第18题"},{"k":"b-d6-8","day":"d6","topic":"剩余价值与资本","cls":"jing","q":"生产资料和劳动力在构成上的比例是","o":["资本的技术构成","资本的价值构成","资本的有机构成","资本的数量构成"],"a":0,"w":"按实物量算的比例叫技术构成；按价值算的叫价值构成；由技术构成决定并反映其变化的价值构成才叫有机构成。","s":"2023年4月·第18题"},{"k":"b-d6-9","day":"d6","topic":"剩余价值与资本","cls":"jing","q":"以下不属于资本积累后果的是","o":["资本有机构成提高","工作日的延长","相对过剩人口的形成","贫富两极分化扩大"],"a":1,"w":"问「不属于」。延长工作日是生产绝对剩余价值的手段，不是资本积累带来的后果。","s":"2021年10月·第17题"},{"k":"b-d6-10","day":"d6","topic":"剩余价值与资本","cls":"jing","q":"平均利润率是","o":["社会的利润总量与社会预付可变资本的比率","社会的利润总量与社会预付不变资本的比率","社会的剩余价值总量与社会预付可变资本的比率","社会的剩余价值总量与社会预付总资本的比率"],"a":3,"w":"分子是全社会剩余价值总量，分母是全社会预付总资本。分母只要出现「可变资本」的，那是剩余价值率。","s":"2020年10月·第18题"},{"k":"b-d6-11","day":"d6","topic":"剩余价值与资本","cls":"jing","q":"资本主义再生产周期通常包括四个阶段，其中作为必经阶段和基本阶段的是","o":["危机阶段","萧条阶段","复苏阶段","高涨阶段"],"a":0,"w":"四阶段：危机→萧条→复苏→高涨。危机是周期的起点，也是必经和基本阶段。","s":"2025年10月·第17题"},{"k":"b-d7-0","day":"d7","topic":"垄断与科学社会主义","cls":"ke","q":"19世纪末20世纪初形成的垄断资本主义主要以私人垄断资本为基础。私人垄断资本主义形成的基础是","o":["生产集中和市场集中","生产集中和资本集中","资本集中和市场集中","技术集中和资本集中"],"a":1,"w":"固定搭配：生产集中和资本集中发展到一定程度必然产生垄断。出现「市场集中」「技术集中」的都是编的。","s":"2026年4月·第19题"},{"k":"b-d7-1","day":"d7","topic":"垄断与科学社会主义","cls":"ke","q":"垄断资本主义形成于19世纪末20世纪初，由于这一时期的垄断资本主义主要以私人垄断资本为基础，因此又被称为","o":["私人垄断资本主义","垄断竞争资本主义","国家垄断资本主义","金融垄断资本主义"],"a":0,"w":"两个阶段要分清：二战前是私人垄断，二战后国家干预加强才叫国家垄断资本主义。","s":"2025年10月·第19题"},{"k":"b-d7-2","day":"d7","topic":"垄断与科学社会主义","cls":"ke","q":"垄断是通过一定的垄断组织形式实现的。在一个或几个经济部门中占据垄断地位的大企业联合形成的垄断组织中，最简单、初级的形式是","o":["短期价格协定","长期价格协定","短期市场协定","长期市场协定"],"a":0,"w":"从松到紧：短期价格协定 → 卡特尔 → 辛迪加 → 托拉斯 → 康采恩 → 混合联合公司。最简单、最初级的是短期价格协定。","s":"2026年4月·第20题"},{"k":"b-d7-3","day":"d7","topic":"垄断与科学社会主义","cls":"ke","q":"垄断利润的主要实现形式是垄断组织制定的","o":["市场规则","市场秩序","垄断规则","垄断价格"],"a":3,"w":"垄断利润靠垄断价格实现：卖的时候定高价，买的时候压低价。","s":"2023年10月·第18题"},{"k":"b-d7-4","day":"d7","topic":"垄断与科学社会主义","cls":"ke","q":"金融寡头对国家机器的控制主要是通过","o":["参与制来实现","同政府的“个人联合”来实现","同政府的金融联系来实现","对政府项目的资本参与来实现"],"a":1,"w":"记两条线：控制经济靠「参与制」，控制国家机器靠「个人联合」。这两个最容易对调。","s":"2023年10月·第19题"},{"k":"b-d7-5","day":"d7","topic":"垄断与科学社会主义","cls":"ke","q":"国家垄断资本主义对国民经济进行宏观调控的主要手段是","o":["经济手段和行政手段","法律手段和行政手段","经济手段和法律手段","法律手段和计划手段"],"a":2,"w":"主要手段是经济手段和法律手段，行政手段只在特定情况下偶尔使用。凡带「计划手段」的一律排除。","s":"2023年10月·第21题"},{"k":"b-d7-6","day":"d7","topic":"垄断与科学社会主义","cls":"ke","q":"恩格斯在《在马克思墓前的讲话》中指出，马克思一生有两大发现。正是这两大发现为实现社会主义从空想到科学的飞跃奠定了坚实的理论基础。这两大发现是","o":["辩证唯物主义和历史唯物主义","唯物史观和剩余价值学说","劳动价值论和剩余价值学说","唯物论和辩证法"],"a":1,"w":"两大发现固定就是唯物史观＋剩余价值学说。A、D 说的是马克思主义哲学的组成，不是「发现」。","s":"2026年4月·第23题"},{"k":"b-d7-7","day":"d7","topic":"垄断与科学社会主义","cls":"ke","q":"无产阶级夺取政权的第一次伟大尝试是","o":["第一国际成立","巴黎公社革命","第二国际成立","十月革命"],"a":1,"w":"巴黎公社是第一次「尝试」，十月革命才是第一次「成功」并建立国家。尝试和成功是两个词。","s":"2025年10月·第23题"},{"k":"b-d7-8","day":"d7","topic":"垄断与科学社会主义","cls":"ke","q":"世界上第一个社会主义国家是","o":["波兰人民共和国","苏维埃俄国","法国巴黎公社","中华人民共和国"],"a":1,"w":"1917年十月革命建立苏维埃俄国。巴黎公社是政权尝试，不是国家。","s":"2023年4月·第23题"},{"k":"b-d7-9","day":"d7","topic":"垄断与科学社会主义","cls":"ke","q":"社会主义国家的最高政治领导力量是","o":["工会","社会党","共产党","共青团"],"a":2,"w":"最高政治领导力量是共产党。注意「社会党」不是共产党，是个干扰项。","s":"2025年10月·第24题"},{"k":"b-d7-10","day":"d7","topic":"垄断与科学社会主义","cls":"ke","q":"实现了阶级的消灭和国家的消亡的社会是","o":["社会主义社会","共产主义社会","民主法治社会","信息网络社会"],"a":1,"w":"社会主义阶段国家还在、阶级差别还在；只有共产主义才实现阶级消灭和国家消亡。","s":"2023年10月·第25题"},{"k":"b-d7-11","day":"d7","topic":"垄断与科学社会主义","cls":"ke","q":"共产主义社会的根本特征是","o":["人与自然和谐共生","人们的精神境界极大提高","社会关系高度和谐","实现人的自由而全面的发展"],"a":3,"w":"四个都是共产主义的特征，但问「根本」特征只有一个：人的自由而全面的发展。限定词决定答案。","s":"2025年10月·第25题"}]};
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const app=$('#app');
+const pad=n=>String(n).padStart(2,'0');
+const ymd=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const todayStr=()=>ymd(new Date());
+const yestStr=()=>{const d=new Date();d.setDate(d.getDate()-1);return ymd(d);};
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const L='ABCD';
+const nl=s=>String(s).replace(/\n/g,'<br>');
+
+/* ================= 数据 ================= */
+const BLK={xu:'绪论',zhe:'哲学',jing:'政治经济学',ke:'科学社会主义'};
+const GCLS={'绪论':'xu','唯物论':'zhe','辩证法':'zhe','认识论':'zhe','唯物史观':'zhe','政经':'jing','垄断':'jing','科社':'ke'};
+const CARDS=D.cards.map((c,i)=>({i,g:c[0],q:c[1],a:c[2],m:c[3],cls:GCLS[c[0]]||'zhe'}));
+const GROUPS=['全部',...new Set(CARDS.map(c=>c.g))];
+const SQ=D.sq, SQM={}; SQ.forEach(s=>SQM[s.id]=s);
+const bi=i=>i<2?'xu':i<13?'zhe':i<22?'jing':'ke';
+const EXAMS=[
+ {id:'e2025',name:'2025 年 10 月卷',mc:D.e2025.map((q,i)=>({k:'e2025-'+i,q:q.q,o:q.o,a:q.a,w:q.w+(q.p?'（教材 '+q.p+'）':''),s:'2025 年 10 月第 '+(i+1)+' 题',cls:bi(i),topic:BLK[bi(i)]})),sa:['a26','a27','a28','a29','a30'],lun:['a31','a32','a33']},
+ {id:'e2026',name:'2026 年 4 月卷',mc:D.e2026.map((q,i)=>({k:'e2026-'+i,q:q[0],o:q[1],a:q[2],w:q[3],s:'2026 年 4 月第 '+(i+1)+' 题',cls:bi(i),topic:BLK[bi(i)]})),sa:['b26','b27','b28','b29','b30'],lun:['b31','b32','b33']}
+];
+const EXM={}; EXAMS.forEach(e=>EXM[e.id]=e);
+const BANK=D.bank.map(b=>({k:b.k,day:b.day,topic:b.topic,cls:b.cls,q:b.q,o:b.o,a:b.a,w:b.w,s:String(b.s).replace('·',' ')}));
+const Q={}; BANK.forEach(q=>Q[q.k]=q); EXAMS.forEach(e=>e.mc.forEach(q=>Q[q.k]=q));
+const DAYS=[]; BANK.forEach(b=>{if(!DAYS.some(d=>d.id===b.day))DAYS.push({id:b.day,topic:b.topic,cls:b.cls});});
+
+/* ================= 存档 ================= */
+const KEY='mayuan3.v2';
+const fresh=()=>({xp:0,fc:{},sq:{},wrong:{},wrongPeak:0,st:{r:0,t:0,best:0},daily:{d:'',fc:0,bz:0,sq:0,done:0},
+  streak:{last:'',n:0},ex:{},run:null,ach:{},date:'',sound:1,vib:1,kit:{},fcg:'全部',sub:{t:0,s:0}});
+let S=(()=>{try{const o=JSON.parse(localStorage.getItem(KEY));return o?Object.assign(fresh(),o):fresh();}catch(e){return fresh();}})();
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}};
+function daily(){const t=todayStr();if(S.daily.d!==t)S.daily={d:t,fc:0,bz:0,sq:0,done:0};return S.daily;}
+const streakNow=()=>(S.streak.last===todayStr()||S.streak.last===yestStr())?S.streak.n:0;
+function daysLeft(){if(!S.date)return null;const [y,m,d]=S.date.split('-').map(Number);const t=new Date();
+  return Math.round((new Date(y,m-1,d)-new Date(t.getFullYear(),t.getMonth(),t.getDate()))/864e5);}
+
+/* ================= 特效 ================= */
+const REDUCE=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FX=(()=>{
+  const cv=$('#fx'),ctx=cv.getContext('2d');let W=0,H=0,parts=[],run=false;
+  function rs(){const r=Math.min(window.devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*r;cv.height=H*r;cv.style.width=W+'px';cv.style.height=H+'px';ctx.setTransform(r,0,0,r,0,0);}
+  rs();addEventListener('resize',rs);
+  const COL=['#7B61FF','#FF8FB1','#FFC83D','#1DBF94','#3AA8FF','#FF6B6B'];
+  function add(p){parts.push(p);if(!run){run=true;requestAnimationFrame(tick);}}
+  function burst(x,y,n=30,pw=1){if(REDUCE)n=Math.min(n,6);for(let i=0;i<n;i++){const a=Math.random()*6.283,v=(2.5+Math.random()*6)*pw;
+    add({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-3.5*pw,g:.22,r:Math.random()*6.3,vr:(Math.random()-.5)*.4,s:4+Math.random()*6,c:COL[i%6],sh:i%3,l:80+Math.random()*50});}}
+  function rain(n=140){if(REDUCE)n=20;for(let i=0;i<n;i++)add({x:Math.random()*W,y:-20-Math.random()*H*.6,vx:(Math.random()-.5)*2,vy:2+Math.random()*3,g:.04,r:Math.random()*6.3,vr:(Math.random()-.5)*.3,s:5+Math.random()*6,c:COL[i%6],sh:i%3,l:260});}
+  function star(s){ctx.beginPath();for(let i=0;i<10;i++){const r=i%2?s*.42:s,a=i*Math.PI/5-Math.PI/2;ctx.lineTo(Math.cos(a)*r,Math.sin(a)*r);}ctx.closePath();ctx.fill();}
+  function tick(){ctx.clearRect(0,0,W,H);parts=parts.filter(p=>p.l>0&&p.y<H+40);
+    for(const p of parts){p.vx*=.99;p.vy+=p.g;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.l--;ctx.save();ctx.globalAlpha=Math.min(1,p.l/30);ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.fillStyle=p.c;
+      if(p.sh===0){ctx.beginPath();ctx.arc(0,0,p.s/2,0,6.283);ctx.fill();}else if(p.sh===1)ctx.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);else star(p.s*.7);ctx.restore();}
+    if(parts.length)requestAnimationFrame(tick);else{run=false;ctx.clearRect(0,0,W,H);}}
+  function float(t,x,y,cls='xp'){const e=document.createElement('div');e.className='float '+cls;e.textContent=t;e.style.left=x+'px';e.style.top=y+'px';document.body.appendChild(e);setTimeout(()=>e.remove(),1050);}
+  function toast(h,cls=''){const e=document.createElement('div');e.className='toast '+cls;e.innerHTML=h;$('#toasts').appendChild(e);setTimeout(()=>{e.classList.add('out');setTimeout(()=>e.remove(),260);},2600);}
+  function shake(el){if(!el)return;el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');}
+  function combo(t){const e=document.createElement('div');e.className='combo-pop';e.textContent=t;document.body.appendChild(e);setTimeout(()=>e.remove(),1150);}
+  return {burst,rain,float,toast,shake,combo};
+})();
+let AC=null;
+function tone(f,t0,dur,type='sine',vol=.1,f2){try{if(!AC)AC=new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();
+  const o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime+t0;o.type=type;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+dur);
+  g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+dur+.03);}catch(e){}}
+const SND={ok(){tone(880,0,.12,'triangle');tone(1318,.08,.2,'triangle');},bad(){tone(240,0,.25,'square',.05,130);},flip(){tone(520,0,.07,'sine',.06,760);},
+  combo(){[660,880,1100,1320].forEach((f,i)=>tone(f,i*.07,.15,'triangle',.09));},level(){[523,659,784,1046].forEach((f,i)=>tone(f,i*.11,.28,'triangle',.11));},
+  ach(){tone(988,0,.1,'sine',.1);tone(1480,.09,.28,'sine',.1);},win(){[523,659,784,1046,784,1046].forEach((f,i)=>tone(f,i*.12,.24,'triangle',.1));},tap(){tone(700,0,.04,'sine',.04);}};
+const sound=k=>{if(S.sound)SND[k]&&SND[k]();};
+const vib=ms=>{if(!S.vib)return;try{if(window.AndroidFx)AndroidFx.vibrate(ms);else if(navigator.vibrate)navigator.vibrate(ms);}catch(e){}};
+const ctr=el=>{const r=el.getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2];};
+
+/* ================= 吉祥物 马小原 ================= */
+function mascot(mood='idle',cls='big'){return `<svg class="mascot m-${mood} ${cls}" viewBox="0 0 120 124" aria-hidden="true">
+<g class="stars" fill="#FFC83D" stroke="#2A1F45" stroke-width="1.6" stroke-linejoin="round"><path d="M10 36l2.6 5.4 5.4 2.6-5.4 2.6L10 52l-2.6-5.4L2 44l5.4-2.6z"/><path d="M108 22l2 4 4 2-4 2-2 4-2-4-4-2 4-2z"/><path d="M110 86l1.6 3.4 3.4 1.6-3.4 1.6-1.6 3.4-1.6-3.4-3.4-1.6 3.4-1.6z"/></g>
+<g stroke="#2A1F45" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
+<path d="M84 30Q106 44 100 80Q93 66 86 62Z" fill="#FF8FB1"/>
+<path d="M39 38L32 4l21 21z" fill="#FFF4E8"/><path d="M81 38l7-34-21 21z" fill="#FFF4E8"/>
+<ellipse cx="60" cy="62" rx="34" ry="39" fill="#FFF4E8"/>
+<ellipse cx="60" cy="98" rx="25" ry="18" fill="#FFE0D2"/>
+<path d="M42 30Q58 8 78 24Q71 29 72 42Q63 33 55 40Q53 31 42 30Z" fill="#FF8FB1"/>
+<path d="M23 50Q60 35 97 50L96 60Q60 46 24 60Z" fill="#FF4F6D"/><path d="M95 52l15-7-3 13z" fill="#FF4F6D"/><path d="M95 56l14 7-9 5z" fill="#FF4F6D"/></g>
+<path d="M38 30l-3.5-17 12 11z" fill="#FF8FB1"/><path d="M82 30l3.5-17-12 11z" fill="#FF8FB1"/>
+<text x="60" y="54.5" text-anchor="middle" font-size="10" font-weight="900" fill="#fff" font-family="system-ui,sans-serif">必过</text>
+<g class="e-norm" fill="#2A1F45"><ellipse cx="46" cy="71" rx="5.4" ry="6.8"/><ellipse cx="74" cy="71" rx="5.4" ry="6.8"/><circle cx="48" cy="68" r="2.1" fill="#fff"/><circle cx="76" cy="68" r="2.1" fill="#fff"/></g>
+<g class="e-happy" fill="none" stroke="#2A1F45" stroke-width="3.4" stroke-linecap="round"><path d="M39.5 73Q46 64 52.5 73"/><path d="M67.5 73Q74 64 80.5 73"/></g>
+<ellipse cx="34" cy="82" rx="6.5" ry="4" fill="#FF8FB1" opacity=".55"/><ellipse cx="86" cy="82" rx="6.5" ry="4" fill="#FF8FB1" opacity=".55"/>
+<ellipse cx="51" cy="95" rx="2.4" ry="3.6" fill="#2A1F45" transform="rotate(-18 51 95)"/><ellipse cx="69" cy="95" rx="2.4" ry="3.6" fill="#2A1F45" transform="rotate(18 69 95)"/>
+<path class="mo-smile" d="M52 106Q60 111.5 68 106" fill="none" stroke="#2A1F45" stroke-width="2.6" stroke-linecap="round"/>
+<path class="mo-open" d="M51 104.5Q60 116 69 104.5Z" fill="#C23A5B" stroke="#2A1F45" stroke-width="2.4" stroke-linejoin="round"/>
+<path class="mo-sad" d="M52 110Q60 104 68 110" fill="none" stroke="#2A1F45" stroke-width="2.6" stroke-linecap="round"/>
+<path class="sweat" d="M98 60Q105 71 99 76Q92 73 98 60Z" fill="#8FD3FF" stroke="#2A1F45" stroke-width="2"/></svg>`;}
+function mood(el,m,ms=1500){if(!el)return;el.classList.remove('m-idle','m-happy','m-sad','m-cheer');void el.getBoundingClientRect();el.classList.add('m-'+m);
+  clearTimeout(el._t);if(ms)el._t=setTimeout(()=>{el.classList.remove('m-'+m);el.classList.add('m-idle');},ms);}
+
+/* ================= 图标 ================= */
+const IC={
+ back:'<svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+ gear:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 2.8v2.6M12 18.6v2.6M4.2 7.5l2.3 1.3M17.5 15.2l2.3 1.3M4.2 16.5l2.3-1.3M17.5 8.8l2.3-1.3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
+ son:'<svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9a4 4 0 010 6M18 6.5a7.5 7.5 0 010 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+ soff:'<svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M16 9.5l5 5M21 9.5l-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+ grid:'<svg viewBox="0 0 24 24"><g fill="currentColor"><circle cx="6" cy="6" r="2.2"/><circle cx="12" cy="6" r="2.2"/><circle cx="18" cy="6" r="2.2"/><circle cx="6" cy="12" r="2.2"/><circle cx="12" cy="12" r="2.2"/><circle cx="18" cy="12" r="2.2"/><circle cx="6" cy="18" r="2.2"/><circle cx="12" cy="18" r="2.2"/><circle cx="18" cy="18" r="2.2"/></g></svg>',
+ pause:'<svg viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1.5" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1.5" fill="currentColor"/></svg>',
+ flag:'<svg viewBox="0 0 24 24"><path d="M6 21V4m0 0h10l-2 4 2 4H6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg>'
+};
+const topbar=(t,back='',right='')=>`<header class="tb"><a class="ib" href="#${back}" aria-label="返回">${IC.back}</a><h1>${t}</h1><div class="tb-r">${right}</div></header>`;
+const starsH=n=>`<span class="stars">${[0,1,2].map(i=>`<i class="${i<n?'on':''}">★</i>`).join('')}</span>`;
+
+/* ================= 弹层 ================= */
+function openModal(html,mount,opt={}){const m=$('#modal');m.innerHTML=`<div class="mbg"></div><div class="mbox ${opt.cls||''}">${html}</div>`;m.hidden=false;
+  requestAnimationFrame(()=>m.classList.add('on'));const close=()=>{m.classList.remove('on');setTimeout(()=>{m.hidden=true;m.innerHTML='';},220);};
+  if(!opt.lock)$('.mbg',m).onclick=close;$$('[data-close]',m).forEach(b=>b.onclick=close);if(mount)mount($('.mbox',m),close);return close;}
+
+/* ================= 成长系统 ================= */
+const LV=[[1,'萌新小马',0],[2,'小跑马驹',120],[3,'冲刺骏马',350],[4,'千里良驹',700],[5,'必过神驹',1200]];
+const lvOf=x=>{let r=LV[0];for(const l of LV)if(x>=l[2])r=l;return r;};
+const nextLv=x=>LV.find(l=>l[2]>x)||null;
+function addXP(n,x,y){if(!n)return;const b=lvOf(S.xp)[0];S.xp+=n;save();if(x!=null)FX.float('+'+n+' 经验',x,y,'xp');
+  const a=lvOf(S.xp);if(a[0]>b)setTimeout(()=>{sound('level');FX.rain(120);openModal(`<div class="rays"></div>${mascot('cheer','mid')}<p class="lvn">Lv${a[0]}</p><h3>升级为「${a[1]}」</h3><p class="mm">累计 ${S.xp} 经验。离考场又近一步。</p><button class="btn full" data-close>继续冲</button>`,null,{cls:'lvup'});},800);}
+const ACH=[['first','🌱','第一步','答对第一道闪电战题'],['c3','🔥','三连击','闪电战连对 3 题'],['c10','⚡','十连封神','闪电战连对 10 题'],
+ ['fc30','🃏','闪卡达人','掌握 30 张闪卡'],['fcall','🧠','过目不忘','掌握全部闪卡'],['sq3','✍️','采分点猎手','主观题拼图拿到 3 星'],
+ ['sqall','📜','十六道全通','16 道主观题都拿到星'],['exam','📝','上过考场','完成一次模拟考'],['pass','🎯','及格在望','模拟考总分达到 60'],
+ ['clear','💥','错题终结者','把 5 道以上的错题本清空'],['streak3','📅','三天不断','连续 3 天完成今日冲刺'],['kit','🎒','万事俱备','勾完考试当天清单']];
+function unlock(id){if(S.ach[id])return;S.ach[id]=todayStr();save();const a=ACH.find(x=>x[0]===id);
+  setTimeout(()=>{FX.toast(`<span class="tb">${a[1]}</span><span><b>解锁成就：${a[2]}</b><small>${a[3]}</small></span>`,'ach');sound('ach');},400);}
+const TG={fc:10,bz:12,sq:1};
+function bump(k,n=1){const d=daily();d[k]+=n;if(!d.done&&d.fc>=TG.fc&&d.bz>=TG.bz&&d.sq>=TG.sq){d.done=1;
+  if(S.streak.last!==d.d){S.streak.n=S.streak.last===yestStr()?S.streak.n+1:1;S.streak.last=d.d;}save();
+  if(S.streak.n>=3)unlock('streak3');
+  setTimeout(()=>{sound('win');FX.rain(160);addXP(50);openModal(`${mascot('cheer','mid')}<h3 style="text-align:center">今日冲刺完成</h3><p class="mm" style="text-align:center">闪卡、闪电战、主观题全部达标。连续打卡 ${S.streak.n} 天，奖励 50 经验。</p><button class="btn full b-mint" data-close>收下</button>`,m=>{$('.mascot',m).style.margin='0 auto';});},900);}
+  save();}
+function markWrong(k){S.wrong[k]=1;S.wrongPeak=Math.max(S.wrongPeak,Object.keys(S.wrong).length);}
+function killWrong(k,el){if(!S.wrong[k])return false;delete S.wrong[k];if(el){const [x,y]=ctr(el);FX.float('消灭一道错题',x,y-30,'kill');}
+  if(!Object.keys(S.wrong).length&&S.wrongPeak>=5)unlock('clear');return true;}
+
+/* ================= 首页 ================= */
+function sayLine(){const d=daily(),l=daysLeft();if(l===null)return '先告诉我哪天考试吧';if(l<0)return '考试结束啦，辛苦了！';
+  if(l===0)return '就是今天！每道题都写满';if(d.done)return '今天的冲刺完成啦，早点休息';if(l<=3)return '最后 '+l+' 天，清一清错题本';
+  if(d.fc<TG.fc)return '先翻 '+(TG.fc-d.fc)+' 张闪卡热热身？';if(d.bz<TG.bz)return '来一轮闪电战，还差 '+(TG.bz-d.bz)+' 题';return '再拼一道主观题，今天就圆满了';}
+function predict(){const t=S.st.t;if(t<20)return {need:20-t};const pm=S.st.r/t;let ps=null,how='';
+  if(S.sub.t>0){ps=S.sub.s/S.sub.t;how='主观题按模拟考自评';}
+  else{const ids=Object.keys(S.sq);if(ids.length>=3){ps=ids.reduce((a,k)=>a+S.sq[k],0)/(ids.length*3)*.85;how='主观题按拼图星级打八五折（认出来比写出来容易）';}}
+  return {pm,ps,how,score:ps===null?null:Math.round(50*pm+50*ps)};}
+function ring(ic,label,v,t,col,href){const p=Math.min(v/t,1),C=163.36;return `<a class="r3" href="#${href}">${v>=t?'<span class="ok">✓</span>':''}<div class="rw"><svg viewBox="0 0 64 64"><circle class="rt" cx="32" cy="32" r="26"/><circle class="rv" cx="32" cy="32" r="26" stroke="${col}" stroke-dasharray="${C}" stroke-dashoffset="${C}" data-o="${C*(1-p)}"/></svg><span class="ri">${ic}</span></div><span class="rl">${label}</span><span class="rc">${Math.min(v,t)}/${t}</span></a>`;}
+function vHome(){const d=daily(),l=daysLeft(),lv=lvOf(S.xp),nx=nextLv(S.xp);
+  const pct=nx?Math.round((S.xp-lv[2])/(nx[2]-lv[2])*100):100;
+  const fcM=Object.keys(S.fc).length,sqS=Object.values(S.sq).reduce((a,b)=>a+b,0),wn=Object.keys(S.wrong).length,an=Object.keys(S.ach).length;
+  const pr=predict();
+  const ex=EXAMS.map(e=>{const r=S.ex[e.id];const run=S.run&&S.run.id===e.id?'考试中':(r?'最佳 '+r.best+' 分':'未考');return `<span class="pp">${e.name.replace(' 卷','')}：${run}</span>`;}).join('');
+  let pred;
+  if(pr.need)pred=`<div class="pred-h"><span>考试估分</span><b style="font-size:18px">再做 ${pr.need} 题解锁</b></div><p style="margin-top:6px">闪电战或模拟考的选择题累计做满 20 道，就能按正确率估分。</p>`;
+  else if(pr.score===null)pred=`<div class="pred-h"><span>选择题估分</span><b>${Math.round(50*pr.pm)}<small>/ 50</small></b></div><div class="pbar"><i style="width:0" data-w="${pr.pm*100}"></i></div><p>正确率 ${Math.round(pr.pm*100)}%（${S.st.t} 题）。做一套模拟考并自评主观题，就能估总分。</p>`;
+  else pred=`<div class="pred-h"><span>按目前练习粗估总分</span><b>${pr.score}<small>分</small></b></div><div class="pbar"><i style="width:0" data-w="${pr.score}"></i><em style="left:60%"></em></div><p>选择题正确率 ${Math.round(pr.pm*100)}%（${S.st.t} 题）；${pr.how}。只作参考，阅卷还有酌情分。</p>`;
+  app.innerHTML=`<div class="hrow"><div class="streak ${streakNow()?'on':''}">🔥 <b>${streakNow()}</b> 天连续冲刺</div>
+  <div class="hbtns"><button class="ib" id="bS" aria-label="音效">${S.sound?IC.son:IC.soff}</button><a class="ib" href="#settings" aria-label="设置">${IC.gear}</a></div></div>
+  <section class="hero"><button class="board" id="bD"><span class="rings"><i></i><i></i></span>
+   <span class="bh">${l===null?'还没设考试日':'距离自考还有'}</span><span class="bn ${l===null?'q':''}">${l===null?'?':Math.max(l,0)}</span><span class="bu">${l===null?'点我设置':'天'}</span></button>
+   <div class="hm"><div class="say">${sayLine()}</div>${mascot('idle','big')}</div></section>
+  <div class="lvbar"><span class="lvt">Lv${lv[0]} ${lv[1]}</span><div class="xpb"><i style="width:${pct}%"></i></div><span class="xpn">${S.xp}${nx?' / '+nx[2]:''}</span></div>
+  <section class="today"><div class="sec-h"><h2>今日冲刺</h2><span>${d.done?'全部完成':[d.fc>=TG.fc,d.bz>=TG.bz,d.sq>=TG.sq].filter(Boolean).length+' / 3 达标'}</span></div>
+   <div class="rings3">${ring('🃏','闪卡',d.fc,TG.fc,'#7B61FF','cards')}${ring('⚡','闪电战',d.bz,TG.bz,'#FFB800','blitz')}${ring('🧩','主观题',d.sq,TG.sq,'#1DBF94','sq')}</div></section>
+  <section class="bento">
+   <a class="tile t-cards" href="#cards"><span class="te">🃏</span><span class="tt">闪卡翻翻乐</span><span class="ts">已掌握 ${fcM} / ${CARDS.length} 张</span><span class="tbar"><i style="width:${fcM/CARDS.length*100}%"></i></span></a>
+   <a class="tile t-blitz" href="#blitz"><span class="te">⚡</span><span class="tt">闪电战</span><span class="ts">最佳连对 ${S.st.best}</span></a>
+   <a class="tile t-sq" href="#sq"><span class="te">🧩</span><span class="tt">主观题拼图</span><span class="ts">★ ${sqS} / ${SQ.length*3}</span></a>
+   <a class="tile t-exam" href="#exam"><span class="te">📝</span><span class="tt">模拟考场</span><span class="papers">${ex}</span></a>
+   <div class="mini3"><a class="tile sm t-wrong" href="#wrong">${wn?`<span class="badge-n">${wn}</span>`:''}<span class="te">📕</span><span class="tt">错题本</span><span class="ts">${wn?wn+' 道待消灭':'空的'}</span></a>
+   <a class="tile sm t-kit" href="#kit"><span class="te">🎒</span><span class="tt">考场锦囊</span><span class="ts">口诀和清单</span></a>
+   <a class="tile sm t-ach" href="#ach"><span class="te">🏆</span><span class="tt">成就</span><span class="ts">${an} / ${ACH.length}</span></a></div></section>
+  <section class="pred">${pred}</section>`;
+  $('#bD').onclick=dateModal;
+  $('#bS').onclick=()=>{S.sound=S.sound?0:1;save();$('#bS').innerHTML=S.sound?IC.son:IC.soff;if(S.sound)sound('ok');};
+  const m=$('.hero .mascot');m.onclick=()=>{mood(m,'happy');sound('tap');};
+  requestAnimationFrame(()=>setTimeout(()=>{$$('.rv').forEach(c=>c.style.strokeDashoffset=c.dataset.o);$$('.pbar i').forEach(i=>i.style.width=Math.min(100,i.dataset.w)+'%');},60));}
+function dateModal(){openModal(`<h3>哪天考试？</h3><p class="mm">设置后，首页倒计时牌会显示剩余天数。</p><input type="date" id="dIn" value="${S.date||''}"><div class="mbtns"><button class="btn b-ghost" data-close>取消</button><button class="btn" id="dOk">保存</button></div>`,
+  (m,close)=>{$('#dOk',m).onclick=()=>{const v=$('#dIn',m).value;if(!v){FX.toast('先选一个日期');return;}S.date=v;save();close();render();};});}
+
+/* ================= 闪卡 ================= */
+let FCQ=null,FCG=null;
+function fcQueue(){if(FCQ&&FCG===S.fcg)return FCQ;FCG=S.fcg;FCQ=CARDS.filter(c=>(S.fcg==='全部'||c.g===S.fcg)&&!S.fc[c.i]).map(c=>c.i);return FCQ;}
+function vCards(){const q=fcQueue(),grp=CARDS.filter(c=>S.fcg==='全部'||c.g===S.fcg),mastered=grp.filter(c=>S.fc[c.i]).length;
+  let body;
+  if(!q.length)body=`<div class="fc-done">${mascot('cheer','mid')}<h2>这一组全部掌握</h2><p class="muted">${grp.length} 张都记住了。换一组，或者把这组重新过一遍。</p><div class="row"><button class="btn b-ghost" id="fR">这组再来一遍</button><button class="btn" id="fA">看全部闪卡</button></div></div>`;
+  else{const c=CARDS[q[0]];body=`<div class="deck">${q.length>2?'<div class="fcard b2"></div>':''}${q.length>1?'<div class="fcard b1"></div>':''}
+   <div class="fcard top in" id="top"><div class="flip"><div class="face front"><span class="chip c-${c.cls}">${c.g}</span><p class="fq">${c.q}</p><span class="fhint">点一下翻面，左右滑动分拣</span></div>
+   <div class="face back"><span class="fa-l">${c.q}</span><p class="fa">${nl(c.a)}</p><p class="fm">💡 ${c.m}</p></div></div>
+   <span class="stamp s-ok">记住了</span><span class="stamp s-no">再看看</span></div></div>
+   <div class="fc-act"><button class="btn b-lemon" id="fN">再看看</button><button class="btn b-ghost" id="fF">翻面</button><button class="btn b-mint" id="fY">记住了</button></div>`;}
+  app.innerHTML=topbar('闪卡翻翻乐','')+`<div class="chips">${GROUPS.map(g=>`<button class="fchip ${g===S.fcg?'on':''}" data-g="${g}">${g}</button>`).join('')}</div>
+  <div class="fc-meta"><span>这一组已掌握 <b>${mastered}</b> / ${grp.length}</span><span>还剩 ${q.length} 张</span></div>${body}`;
+  $$('.fchip').forEach(b=>b.onclick=()=>{S.fcg=b.dataset.g;save();FCQ=null;vCards();});
+  const on=$('.fchip.on');if(on)on.scrollIntoView({inline:'center',block:'nearest'});
+  if(!q.length){$('#fR').onclick=()=>{grp.forEach(c=>delete S.fc[c.i]);save();FCQ=null;vCards();};$('#fA').onclick=()=>{S.fcg='全部';save();FCQ=null;vCards();};return;}
+  const top=$('#top'),so=$('.s-ok',top),sn=$('.s-no',top);let sx=0,sy=0,dx=0,drag=false,moved=false;
+  const flip=()=>{top.classList.toggle('flipped');sound('flip');};
+  const go=dir=>{top.style.transition='transform .3s ease-in,opacity .3s';top.style.transform=`translateX(${dir*innerWidth}px) rotate(${dir*24}deg)`;top.style.opacity='0';
+    const i=q.shift();if(dir>0){S.fc[i]=1;const [x,y]=ctr(top);FX.burst(x,y,22);sound('ok');addXP(3,x,y-60);bump('fc');
+      const n=Object.keys(S.fc).length;if(n>=30)unlock('fc30');if(n>=CARDS.length)unlock('fcall');}else{q.push(i);sound('flip');}save();setTimeout(vCards,260);};
+  top.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY;dx=0;drag=true;moved=false;top.style.transition='none';});
+  top.addEventListener('pointermove',e=>{if(!drag)return;dx=e.clientX-sx;if(Math.abs(dx)>8&&Math.abs(dx)>Math.abs(e.clientY-sy)){moved=true;try{top.setPointerCapture(e.pointerId);}catch(_){}}
+    if(!moved)return;top.style.transform=`translateX(${dx}px) rotate(${dx*.06}deg)`;so.style.opacity=Math.max(0,Math.min(1,dx/90));sn.style.opacity=Math.max(0,Math.min(1,-dx/90));});
+  const end=()=>{if(!drag)return;drag=false;top.style.transition='';if(moved&&dx>100)go(1);else if(moved&&dx<-100)go(-1);else{top.style.transform='';so.style.opacity=0;sn.style.opacity=0;if(!moved)flip();}};
+  top.addEventListener('pointerup',end);top.addEventListener('pointercancel',()=>{drag=false;top.style.transition='';top.style.transform='';so.style.opacity=0;sn.style.opacity=0;});
+  $('#fF').onclick=flip;$('#fY').onclick=()=>go(1);$('#fN').onclick=()=>go(-1);}
+
+/* ================= 闪电战 ================= */
+let BZ=null,bzT=null;
+function vBlitz(){const wn=Object.keys(S.wrong).length,acc=S.st.t?Math.round(S.st.r/S.st.t*100)+'%':'—';
+  app.innerHTML=topbar('闪电战','')+`<div class="bz-hero">${mascot('happy','mini')}<p>一轮 12 题。10 秒内答对多加 5 经验，连对还有额外奖励。</p></div>
+  <div class="bz-stats"><div><b>${acc}</b><span>累计正确率</span></div><div><b>${S.st.t}</b><span>累计答题</span></div><div><b>${S.st.best}</b><span>最佳连对</span></div></div>
+  <button class="btn full" id="bR">随机来一轮</button>
+  <div class="sec-h" style="margin-top:22px"><h2>按板块练</h2><span>各 12 题</span></div>
+  <div class="daygrid">${DAYS.map(d=>`<button class="dayb" data-d="${d.id}"><span class="chip c-${d.cls}">${BLK[d.cls]}</span><b style="margin-top:6px">${d.topic}</b></button>`).join('')}</div>
+  <button class="btn full b-coral" id="bW" ${wn?'':'disabled'}>${wn?'重刷错题本（'+wn+' 道）':'错题本是空的'}</button>`;
+  $('#bR').onclick=()=>startBZ('rand',shuffle(BANK).slice(0,12).map(q=>q.k));
+  $$('.dayb').forEach(b=>b.onclick=()=>startBZ('day',shuffle(BANK.filter(q=>q.day===b.dataset.d)).map(q=>q.k)));
+  $('#bW').onclick=()=>startBZ('wrong',shuffle(Object.keys(S.wrong).filter(k=>Q[k])).slice(0,30));}
+function startBZ(mode,list){if(!list.length)return;BZ={mode,list,i:0,right:0,combo:0,best:0,xp:0,res:[],wrongs:[]};location.hash='blitz/play';}
+function vBZPlay(){if(!BZ){location.hash='blitz';return;}if(BZ.i>=BZ.list.length){location.hash='blitz/done';return;}
+  const k=BZ.list[BZ.i],q=Q[k];
+  app.innerHTML=topbar(`第 ${BZ.i+1} / ${BZ.list.length} 题`,'blitz',`<span class="combo" id="cb" ${BZ.combo>=2?'':'hidden'}>🔥 ${BZ.combo} 连对</span>`)+
+  `<div class="dots">${BZ.list.map((_,i)=>`<i class="${i<BZ.i?(BZ.res[i]?'ok':'bad'):i===BZ.i?'cur':''}"></i>`).join('')}</div>
+  <div class="timer"><i class="run" id="tb"></i></div><div class="timer-l"><span>快答加分区</span><span>20 秒</span></div>
+  <article class="qcard" id="qc"><span class="chip c-${q.cls}">${q.topic}</span><p class="qs">${q.q}</p>
+  <div>${q.o.map((t,j)=>`<button class="opt" data-j="${j}"><span class="bub"><b>${L[j]}</b></span><span>${t}</span></button>`).join('')}</div></article>
+  <div id="ex"></div><div class="bz-side">${mascot('idle','mini')}</div>`;
+  const t0=Date.now();BZ.lock=false;
+  $$('.opt').forEach(b=>b.onclick=()=>{if(BZ.lock)return;BZ.lock=true;const j=+b.dataset.j,ok=j===q.a,fast=Date.now()-t0<10000;
+    $('#tb').style.animationPlayState='paused';$$('.opt').forEach(o=>o.disabled=true);b.classList.add('picked',ok?'ok':'bad');
+    const ms=$('.bz-side .mascot'),[x,y]=ctr($('.bub',b));S.st.t++;bump('bz');BZ.res[BZ.i]=ok;
+    if(ok){S.st.r++;BZ.right++;BZ.combo++;BZ.best=Math.max(BZ.best,BZ.combo);if(BZ.combo>S.st.best)S.st.best=BZ.combo;
+      const xp=10+(fast?5:0)+(BZ.combo>=3?BZ.combo:0);BZ.xp+=xp;FX.burst(x,y,26);sound('ok');mood(ms,'happy');addXP(xp,x,y-24);
+      killWrong(k,b);unlock('first');if(BZ.combo>=3)unlock('c3');if(BZ.combo>=10)unlock('c10');
+      const cm={3:'三连击！',5:'五连超神！',8:'八连无敌！',10:'十连封神！'}[BZ.combo];if(cm){setTimeout(()=>{FX.combo(cm);sound('combo');FX.burst(innerWidth/2,innerHeight*.38,60,1.3);vib(30);},350);}
+      const cb=$('#cb');if(BZ.combo>=2){cb.hidden=false;cb.textContent='🔥 '+BZ.combo+' 连对';cb.classList.remove('pop');void cb.offsetWidth;cb.classList.add('pop');}}
+    else{$$('.opt')[q.a].classList.add('right');BZ.combo=0;markWrong(k);BZ.wrongs.push(k);FX.shake($('#qc'));vib(90);sound('bad');mood(ms,'sad',1800);const cb=$('#cb');if(cb)cb.hidden=true;}
+    save();const last=BZ.i+1>=BZ.list.length;
+    $('#ex').innerHTML=`<div class="exp ${ok?'ok':'bad'}"><p class="v">${ok?(fast?'答对了，还很快！':'答对了'):'正确答案是 '+L[q.a]}</p><p class="w">${q.w}</p><p class="s">${q.s}</p><button class="btn full ${ok?'b-mint':''}" id="nx">${last?'看这一轮的成绩':'下一题'}</button></div>`;
+    $('#nx').onclick=()=>{BZ.i++;location.hash=last?'blitz/done':'blitz/play';if(!last)render();};
+    setTimeout(()=>$('#ex').scrollIntoView({behavior:'smooth',block:'nearest'}),120);});}
+function vBZDone(){if(!BZ){location.hash='blitz';return;}const n=BZ.list.length,r=BZ.right,p=r/n;
+  const md=p>=.8?'cheer':p>=.5?'happy':'sad';const word=p===1?'全对！这一轮无懈可击。':p>=.8?'很稳，错的那几道看清解析就行。':p>=.5?'过半了，错题已经进错题本，回头再清。':'这轮有点难，正常。错题都存好了，换个板块再来。';
+  app.innerHTML=topbar('这一轮的成绩','blitz')+`<div class="res">${mascot(md,'mid')}<div class="bigscore">${r}<small> / ${n}</small></div><h2>${word}</h2>
+  <div class="res-grid"><div><b>${Math.round(p*100)}%</b><span>正确率</span></div><div><b>${BZ.best}</b><span>最高连对</span></div><div><b>+${BZ.xp}</b><span>经验</span></div></div></div>
+  ${BZ.wrongs.length?`<div class="sec-h"><h2>这轮错的 ${BZ.wrongs.length} 道</h2><span>已存进错题本</span></div><div class="wl">${BZ.wrongs.map(k=>wItem(Q[k])).join('')}</div>`:''}
+  <div class="row2"><a class="btn b-ghost" href="#">回基地</a><button class="btn" id="ag">再来一轮</button></div>`;
+  if(p>=.8){setTimeout(()=>{FX.rain(p===1?180:90);sound('win');},300);}
+  $('#ag').onclick=()=>{const m=BZ.mode;if(m==='wrong')startBZ('wrong',shuffle(Object.keys(S.wrong)).slice(0,30));else startBZ('rand',shuffle(BANK).slice(0,12).map(q=>q.k));};}
+const wItem=q=>`<div class="witem"><span class="chip c-${q.cls}">${q.topic}</span><p class="wq">${q.q}</p><p class="wa">${L[q.a]}. ${q.o[q.a]}</p><p class="ww">${q.w}</p><p class="ws">${q.s}</p></div>`;
+
+/* ================= 主观题拼图 ================= */
+const hl=s=>nl(s).replace(/\[\[(.+?)\]\]/g,'<mark>$1</mark>');
+function vSQList(){const grp=p=>SQ.filter(s=>s.paper===p);
+  const item=s=>`<a class="sqi" href="#sq/${s.id}"><span class="n">${s.no}</span><span class="t">${s.stem}</span><span style="display:flex;flex-direction:column;align-items:flex-end;gap:3px"><span class="chip c-${s.type}">${s.type==='sa'?'简答 6 分':'论述 10 分'}</span>${starsH(S.sq[s.id]||0)}</span></a>`;
+  app.innerHTML=topbar('主观题拼图','')+`<div class="intro">每道题把<b>采分点</b>放进答题纸，里面混了 <b>2 个干扰项</b>。先有序号、再填内容，考场上也这样写。拼完还能<b>遮住关键词背一遍</b>。</div>
+  ${['2025年10月','2026年4月'].map(p=>`<h2 class="paper-h">${p.replace('年',' 年 ').replace('月',' 月')}卷</h2>${grp(p).map(item).join('')}`).join('')}`;}
+function vSQ(id){const s=SQM[id];if(!s){location.hash='sq';return;}const n=s.points.length;
+  const pool=shuffle([...s.points,...s.dis]);let slots=Array(n).fill(null);
+  app.innerHTML=topbar(s.paper.replace('年',' 年 ').replace('月',' 月')+'第 '+s.no+' 题','sq')+
+  `<article class="sq-stem"><span class="chip c-${s.type}">${s.type==='sa'?'简答题 6 分':'论述题 10 分'}</span><p>${s.stem}</p></article>
+  <p class="sq-hint">共 ${n} 个采分点。点下面的词条，按顺序放进答题纸；点答题纸上的词条可以拿回来。</p>
+  <div class="paper" id="pp">${slots.map((_,i)=>`<button class="slot" data-s="${i}"><span class="sn">（${i+1}）</span><span class="sv"></span></button>`).join('')}</div>
+  <div class="pool" id="pl">${pool.map((t,i)=>`<button class="pchip" data-c="${i}">${t}</button>`).join('')}</div>
+  <button class="btn full" id="go" disabled>交卷看分</button><div id="rs"></div>`;
+  const draw=()=>{$$('.slot').forEach((b,i)=>{const c=slots[i];b.classList.toggle('f',c!==null);$('.sv',b).textContent=c===null?'':pool[c];});
+    $$('.pchip').forEach(b=>b.classList.toggle('used',slots.includes(+b.dataset.c)));$('#go').disabled=slots.includes(null);};
+  $$('.pchip').forEach(b=>b.onclick=()=>{const i=slots.indexOf(null);if(i<0)return;slots[i]=+b.dataset.c;sound('tap');draw();});
+  $$('.slot').forEach(b=>b.onclick=()=>{if($('#pp').dataset.done)return;const i=+b.dataset.s;if(slots[i]===null)return;slots[i]=null;draw();});
+  $('#go').onclick=()=>{$('#pp').dataset.done=1;$('#go').remove();$('#pl').remove();
+    let good=0;$$('.slot').forEach((b,i)=>{const ok=s.points.includes(pool[slots[i]]);if(ok)good++;b.classList.remove('f');b.classList.add(ok?'ok':'bad');});
+    const miss=s.points.filter(p=>!slots.map(c=>pool[c]).includes(p));const lost=n-good;const st=lost===0?3:lost===1?2:good>=Math.ceil(n/2)?1:0;
+    const prev=S.sq[id]||0;S.sq[id]=Math.max(prev,st);bump('sq');const x=innerWidth/2;addXP(st*10,x,innerHeight*.4);
+    if(st===3)unlock('sq3');if(SQ.every(q=>S.sq[q.id]>0))unlock('sqall');save();
+    $('#rs').innerHTML=`<div class="card" style="margin-top:14px;text-align:center"><div class="star-row">${[0,1,2].map(i=>`<i class="${i<st?'on':''}" style="animation-delay:${i*.18}s">★</i>`).join('')}</div>
+     <p style="font-weight:900;font-size:17px">${st===3?'采分点全拿到了':st===2?'只差一点':st===1?'拿到一半以上':'这道要多背几遍'}</p>
+     ${miss.length?`<p class="muted small" style="margin-top:6px">漏掉的采分点：</p><div class="miss" style="justify-content:center">${miss.map(m=>`<span>${m}</span>`).join('')}</div>`:''}</div>
+     <div class="tip">💡 <span>${s.tip}</span></div>
+     <div class="ans"><div class="ans-h"><h3>参考答案</h3><button class="toggle" id="cz">遮住关键词背一遍</button></div><div class="body" id="ab">${hl(s.full)}</div><p class="src">${s.src}</p></div>
+     <div class="row2"><button class="btn b-ghost" id="re">再拼一次</button><button class="btn" id="nt">下一道</button></div>`;
+    setTimeout(()=>{if(st>=2){FX.burst(x,innerHeight*.35,st===3?60:30);sound(st===3?'win':'ok');}else{sound('bad');}},250);
+    $('#cz').onclick=()=>{const ab=$('#ab'),on=ab.classList.toggle('cloze');$('#cz').classList.toggle('on',on);$('#cz').textContent=on?'显示全部':'遮住关键词背一遍';$$('mark',ab).forEach(m=>m.classList.remove('rv'));};
+    $$('#ab mark').forEach(m=>m.onclick=()=>{if($('#ab').classList.contains('cloze')){m.classList.add('rv');sound('tap');}});
+    $('#re').onclick=()=>vSQ(id);const ix=SQ.findIndex(q=>q.id===id);$('#nt').onclick=()=>{location.hash='sq/'+SQ[(ix+1)%SQ.length].id;};};}
+
+/* ================= 模拟考场 ================= */
+let exTimer=null;const TOTAL=150*60;
+const mmss=s=>pad(Math.floor(s/60))+':'+pad(s%60);
+function vExamList(){app.innerHTML=topbar('模拟考场','')+`<div class="intro">完全按真卷来：25 道选择、5 道简答、论述 3 选 2，限时 150 分钟。选择题像涂答题卡一样作答，交卷后自动判分；主观题对照采分点<b>自己勾选估分</b>。</div>
+  <div class="card" style="margin-top:14px"><div class="sec-h" style="margin:0"><h2 style="font-size:16px">150 分钟这样分</h2></div>
+  <div class="plan"><div style="flex:35;background:var(--vio)">选择</div><div style="flex:50;background:var(--mint)">简答</div><div style="flex:45;background:var(--orange)">论述</div><div style="flex:20;background:var(--pink)">检查</div></div>
+  <div class="plan-l"><span>0</span><span>35</span><span>85</span><span>130</span><span>150 分钟</span></div></div>
+  ${EXAMS.map(e=>{const r=S.ex[e.id],run=S.run&&S.run.id===e.id;return `<div class="paperc"><h3>${e.name}</h3><div class="meta"><span>满分 100</span>${r?`<span class="best">最佳 ${r.best} 分</span><span>考过 ${r.n} 次</span>`:'<span>还没考过</span>'}${run?`<span style="background:var(--lemon-l);color:#946A00">剩余 ${mmss(S.run.remain)}</span>`:''}</div>
+   <button class="btn full ${run?'b-lemon':''}" data-e="${e.id}">${run?'继续考试':'开始考试'}</button></div>`;}).join('')}`;
+  $$('[data-e]').forEach(b=>b.onclick=()=>{const id=b.dataset.e;if(S.run&&S.run.id===id){location.hash='exam/'+id;return;}
+    const other=S.run&&S.run.id!==id;openModal(`<h3>准备进考场</h3><p class="mm">${other?'另一套卷还没交，开始这套会放弃那次作答。<br><br>':''}计时开始后，离开页面会自动暂停。建议：选择题 35 分钟内做完，拿不准的先标记；简答每道先写序号；论述先把三道都读一遍，再挑两道写。</p><div class="mbtns"><button class="btn b-ghost" data-close>再等等</button><button class="btn b-coral" id="st">开始计时</button></div>`,
+      (m,close)=>{$('#st',m).onclick=()=>{S.run={id,mc:Array(25).fill(-1),fl:Array(25).fill(0),sa:Array(5).fill(''),lun:[{c:0,t:''},{c:0,t:''},{c:0,t:''}],remain:TOTAL,sec:'mc',i:0,ms:{}};save();close();location.hash='exam/'+id;};});});}
+function vExam(id){const e=EXM[id],R=S.run;if(!R||R.id!==id){location.hash='exam';return;}if(R.done){location.hash='exam/'+id+'/grade';return;}
+  const cnt={mc:R.mc.filter(x=>x>=0).length,sa:R.sa.filter(x=>x.trim()).length,lun:R.lun.filter(x=>x.c).length};
+  let body='';
+  if(R.sec==='mc'){const q=e.mc[R.i];body=`<article class="qcard" id="qc"><div class="qno"><b>第 ${R.i+1} 题（2 分）</b><button class="flagb ${R.fl[R.i]?'on':''}" id="fl">${IC.flag}${R.fl[R.i]?'已标记':'标记'}</button></div><p class="qs">${q.q}</p>
+    ${q.o.map((t,j)=>`<button class="opt ${R.mc[R.i]===j?'picked ink':''}" data-j="${j}"><span class="bub"><b>${L[j]}</b></span><span>${t}</span></button>`).join('')}</article>
+    <div class="ex-foot"><button class="btn b-ghost" id="pv" ${R.i===0?'disabled':''}>上一题</button><button class="btn" id="nv">${R.i===24?'去写简答':'下一题'}</button></div>`;}
+  else if(R.sec==='sa'){const s=SQM[e.sa[R.i]];body=`<article class="qcard"><div class="qno"><b>第 ${26+R.i} 题（6 分）</b></div><p class="qs">${s.stem}</p>
+    <textarea class="wr" id="wr" placeholder="（1）&#10;（2）&#10;（3）">${R.sa[R.i].replace(/</g,'&lt;')}</textarea>
+    <div class="wr-tools"><button class="toggle" id="ins">插入序号</button><span id="wc">${R.sa[R.i].length} 字</span></div></article>
+    <div class="ex-foot"><button class="btn b-ghost" id="pv">${R.i===0?'回选择题':'上一题'}</button><button class="btn" id="nv">${R.i===4?'去写论述':'下一题'}</button></div>`;}
+  else{body=`<p class="sq-hint">三道论述题任选两道。先读完三道，挑能写满「原理＋意义」两段的。</p>${e.lun.map((sid,i)=>{const s=SQM[sid],l=R.lun[i];return `<div class="lunc ${l.c?'on':''}"><div class="lh"><b>第 ${31+i} 题（10 分）</b><button class="pick ${l.c?'on':''}" data-p="${i}">${l.c?'已选':'选这道'}</button></div><p>${s.stem}</p>
+    ${l.c?`<textarea class="wr" data-w="${i}" placeholder="原理：&#10;&#10;意义：">${l.t.replace(/</g,'&lt;')}</textarea>`:''}</div>`;}).join('')}
+    <div class="ex-foot"><button class="btn b-ghost" id="pv">回简答题</button><button class="btn b-coral" id="sb2">交卷</button></div>`;}
+  app.innerHTML=`<header class="ex-top"><button class="ib" id="ps" aria-label="暂停">${IC.pause}</button><div class="ex-timer ${R.remain<600?'urgent':''}" id="tm">${mmss(R.remain)}</div><button class="btn btn-sm b-coral" id="sb">交卷</button></header>
+  <nav class="ex-tabs"><button class="tab ${R.sec==='mc'?'on':''}" data-t="mc">选择题<b>${cnt.mc}/25</b></button><button class="tab ${R.sec==='sa'?'on':''}" data-t="sa">简答题<b>${cnt.sa}/5</b></button><button class="tab ${R.sec==='lun'?'on':''}" data-t="lun">论述题<b>${cnt.lun}/2</b></button><button class="ib" id="gc" aria-label="答题卡">${IC.grid}</button></nav>${body}`;
+  const go=(sec,i)=>{R.sec=sec;R.i=i;save();vExam(id);window.scrollTo(0,0);};
+  $$('.tab').forEach(b=>b.onclick=()=>go(b.dataset.t,0));$('#ps').onclick=()=>{location.hash='exam';};$('#sb').onclick=()=>submitAsk(id);$('#gc').onclick=()=>sheet(id,go);
+  if(R.sec==='mc'){$$('.opt').forEach(b=>b.onclick=()=>{const j=+b.dataset.j;R.mc[R.i]=j;save();$$('.opt').forEach(o=>o.classList.remove('picked','ink'));void b.offsetWidth;b.classList.add('picked','ink');sound('tap');vib(12);
+      const t=$$('.tab')[0].querySelector('b');t.textContent=R.mc.filter(x=>x>=0).length+'/25';});
+    $('#fl').onclick=()=>{R.fl[R.i]=R.fl[R.i]?0:1;save();vExam(id);};
+    $('#pv').onclick=()=>go('mc',R.i-1);$('#nv').onclick=()=>R.i===24?go('sa',0):go('mc',R.i+1);
+    let sx=0,sy=0;const qc=$('#qc');qc.addEventListener('touchstart',ev=>{sx=ev.touches[0].clientX;sy=ev.touches[0].clientY;},{passive:true});
+    qc.addEventListener('touchend',ev=>{const dx=ev.changedTouches[0].clientX-sx,dy=ev.changedTouches[0].clientY-sy;if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy)*1.6){if(dx<0&&R.i<24)go('mc',R.i+1);else if(dx>0&&R.i>0)go('mc',R.i-1);}});}
+  else if(R.sec==='sa'){const w=$('#wr');w.oninput=()=>{R.sa[R.i]=w.value;$('#wc').textContent=w.value.length+' 字';save();};
+    $('#ins').onclick=()=>{const k=(w.value.match(/（\d+）/g)||[]).length;w.value+=(w.value&&!w.value.endsWith('\n')?'\n':'')+'（'+(k+1)+'）';w.oninput();w.focus();};
+    $('#pv').onclick=()=>R.i===0?go('mc',24):go('sa',R.i-1);$('#nv').onclick=()=>R.i===4?go('lun',0):go('sa',R.i+1);}
+  else{$$('.pick').forEach(b=>b.onclick=()=>{const i=+b.dataset.p,l=R.lun[i];if(!l.c&&R.lun.filter(x=>x.c).length>=2){FX.toast('论述只能选两道，先取消一道');FX.shake(b);return;}l.c=l.c?0:1;save();vExam(id);});
+    $$('[data-w]').forEach(t=>t.oninput=()=>{R.lun[+t.dataset.w].t=t.value;save();});$('#pv').onclick=()=>go('sa',4);$('#sb2').onclick=()=>submitAsk(id);}
+  clearInterval(exTimer);exTimer=setInterval(()=>{if(document.hidden||!S.run||S.run.done)return;const r=S.run;r.remain=Math.max(0,r.remain-1);
+    const tm=$('#tm');if(tm){tm.textContent=mmss(r.remain);tm.classList.toggle('urgent',r.remain<600);}const el=TOTAL-r.remain;
+    [[35*60,'35 分钟到了，选择题收个尾，去写简答'],[85*60,'该写论述了，先把三道都读一遍'],[130*60,'还剩 20 分钟，留出时间检查'],[145*60,'最后 5 分钟']].forEach(([t,msg])=>{if(el>=t&&!r.ms[t]){r.ms[t]=1;FX.toast('⏰ '+msg);vib(60);}});
+    if(r.remain%5===0)save();if(r.remain===0){FX.toast('时间到，已自动交卷');doSubmit(id);}},1000);}
+function sheet(id,go){const R=S.run;openModal(`<h3>答题卡</h3><p class="mm" style="margin-bottom:4px">黑色是已涂，红点是标记过的题。点编号可以跳过去。</p>
+  <div class="grid25">${R.mc.map((v,i)=>`<button class="gb ${v>=0?'f':''} ${R.fl[i]?'fl':''} ${R.sec==='mc'&&R.i===i?'cur':''}" data-q="${i}">${v>=0?L[v]:i+1}</button>`).join('')}</div>
+  <div class="gsub">简答 ${R.sa.map((t,i)=>`<span class="${t.trim()?'f':''}">${26+i}</span>`).join('')}</div>
+  <div class="gsub">论述 ${R.lun.map((l,i)=>`<span class="${l.c?'f':''}">${31+i}</span>`).join('')}</div>
+  <div class="mbtns" style="margin-top:12px"><button class="btn b-ghost" data-close>继续作答</button><button class="btn b-coral" id="s3">交卷</button></div>`,
+  (m,close)=>{$$('.gb',m).forEach(b=>b.onclick=()=>{close();go('mc',+b.dataset.q);});$('#s3',m).onclick=()=>{close();setTimeout(()=>submitAsk(id),230);};});}
+function submitAsk(id){const R=S.run,a=R.mc.filter(x=>x<0).length,b=R.sa.filter(x=>!x.trim()).length,c=2-R.lun.filter(x=>x.c).length;
+  const warn=[a?`${a} 道选择题没涂`:'',b?`${b} 道简答没写`:'',c>0?`论述还差 ${c} 道没选`:''].filter(Boolean).join('，');
+  openModal(`<h3>确定交卷吗？</h3><p class="mm">${warn?warn+'。选择题不倒扣分，没把握也涂一个。':'全部作答完毕。'}剩余时间 ${mmss(R.remain)}。</p><div class="mbtns"><button class="btn b-ghost" data-close>再检查一下</button><button class="btn b-coral" id="ok">交卷</button></div>`,
+  (m,close)=>{$('#ok',m).onclick=()=>{close();doSubmit(id);};});}
+function doSubmit(id){clearInterval(exTimer);const e=EXM[id],R=S.run;if(!R||R.done)return;let r=0;
+  e.mc.forEach((q,i)=>{S.st.t++;if(R.mc[i]===q.a){S.st.r++;r++;killWrong(q.k);}else markWrong(q.k);});
+  R.done=1;R.mcScore=r*2;R.g={};save();location.hash='exam/'+id+'/grade';}
+function gauge(val,max,col){const C=Math.PI*100;return `<div class="gauge"><svg viewBox="0 0 240 140"><path class="gt" d="M20 125A100 100 0 0 1 220 125"/><path class="gv" d="M20 125A100 100 0 0 1 220 125" stroke="${col}" stroke-dasharray="${C}" stroke-dashoffset="${C}" data-o="${C*(1-val/max)}"/>${max===100?'<line x1="89" y1="30" x2="94" y2="46" stroke="#2A1F45" stroke-width="4" stroke-linecap="round"/><text x="84" y="22" font-size="12" font-weight="900" fill="#2A1F45">60</text>':''}</svg><div class="gn"><b class="cnt" data-v="${val}">0</b><span>满分 ${max}</span></div></div>`;}
+function runGauge(){requestAnimationFrame(()=>setTimeout(()=>{$$('.gv').forEach(p=>p.style.strokeDashoffset=p.dataset.o);$$('.cnt').forEach(el=>{const v=+el.dataset.v,t0=performance.now();
+  const step=t=>{const k=Math.min(1,(t-t0)/1300);el.textContent=Math.round(v*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(step);};requestAnimationFrame(step);});},80));}
+function vGrade(id){const e=EXM[id],R=S.run;if(!R||R.id!==id||!R.done){location.hash='exam';return;}
+  const items=[...e.sa.map((sid,i)=>({key:'s'+i,s:SQM[sid],no:26+i,txt:R.sa[i]})),...e.lun.map((sid,i)=>({key:'l'+i,s:SQM[sid],no:31+i,txt:R.lun[i].t,c:R.lun[i].c})).filter(x=>x.c)];
+  const sc=it=>{const g=R.g[it.key]||[];return Math.round(it.s.max*g.length/it.s.points.length);};
+  const wrong=e.mc.map((q,i)=>({q,i,p:R.mc[i]})).filter(x=>x.p!==x.q.a);
+  app.innerHTML=topbar(e.name+' 成绩','exam')+`<div class="res">${gauge(R.mcScore,50,'#7B61FF')}<h2>选择题 ${R.mcScore} 分</h2><p class="muted small">答对 ${R.mcScore/2} 道，错的已进错题本</p></div>
+  <div class="sec-h" style="margin-top:20px"><h2>主观题自评</h2><span>勾出你写到的采分点</span></div>
+  ${R.lun.filter(x=>x.c).length<2?'<p class="sq-hint">论述只选了 '+R.lun.filter(x=>x.c).length+' 道，没选的按 0 分算。</p>':''}
+  ${items.map(it=>`<div class="gradec" data-k="${it.key}"><div class="gh"><p>${it.no}．${it.s.stem}</p><span class="sc"><b>0</b>/${it.s.max}</span></div>
+   <details><summary>看看我写的</summary><pre>${(it.txt||'（没有作答）').replace(/</g,'&lt;')}</pre></details>
+   ${it.s.points.map((p,j)=>`<label class="ck"><input type="checkbox" data-j="${j}" ${(R.g[it.key]||[]).includes(j)?'checked':''}><span>${p}</span></label>`).join('')}
+   <details><summary>参考答案</summary><div class="ans" style="margin-top:6px;box-shadow:none;padding:4px 0"><div class="body">${hl(it.s.full)}</div></div></details></div>`).join('')}
+  <button class="btn full b-mint" id="tot" style="margin-top:16px">算总分</button><div id="total"></div>
+  ${wrong.length?`<div class="sec-h" style="margin-top:22px"><h2>选择题错了 ${wrong.length} 道</h2></div><div class="wl">${wrong.map(w=>`<div class="witem"><span class="chip c-${w.q.cls}">第 ${w.i+1} 题</span><p class="wq">${w.q.q}</p><p class="wa">正确：${L[w.q.a]}. ${w.q.o[w.q.a]}${w.p>=0?`<span style="color:var(--coral-d)">　你涂了 ${L[w.p]}</span>`:'<span style="color:var(--coral-d)">　没涂</span>'}</p><p class="ww">${w.q.w}</p></div>`).join('')}</div>`:''}`;
+  runGauge();
+  const upd=()=>$$('.gradec').forEach(c=>{const it=items.find(x=>x.key===c.dataset.k);$('.sc b',c).textContent=sc(it);});upd();
+  $$('.gradec input').forEach(ch=>ch.onchange=()=>{const k=ch.closest('.gradec').dataset.k,j=+ch.dataset.j;const g=R.g[k]||(R.g[k]=[]);if(ch.checked){if(!g.includes(j))g.push(j);sound('tap');}else g.splice(g.indexOf(j),1);save();upd();});
+  $('#tot').onclick=()=>{const sub=items.reduce((a,it)=>a+sc(it),0),tot=R.mcScore+sub,pass=tot>=60;
+    const rec=S.ex[id]||{best:0,n:0};rec.n++;rec.best=Math.max(rec.best,tot);rec.last=tot;rec.date=todayStr();S.ex[id]=rec;
+    S.sub.t+=50;S.sub.s+=sub;unlock('exam');if(pass)unlock('pass');S.run=null;save();addXP(80+(pass?50:0));
+    $('#tot').remove();$('#total').innerHTML=`<div class="card" style="margin-top:16px;text-align:center">${gauge(tot,100,pass?'#1DBF94':'#FF9F43')}
+     <h2 style="font-size:22px;font-weight:900;margin-top:4px">${pass?'过线了！':'离 60 分还差 '+(60-tot)+' 分'}</h2>
+     <p class="muted small" style="margin:6px 0 4px">选择 ${R.mcScore} ＋ 主观 ${sub}。${pass?'保持这个状态进考场。':'主观题多写一条要点，差距最容易补。'}</p>
+     <p class="muted small">采分点按比例估分，实际阅卷常有酌情分。</p></div>
+     <div class="row2"><a class="btn b-ghost" href="#">回基地</a><a class="btn" href="#wrong">去清错题本</a></div>`;
+    runGauge();setTimeout(()=>{if(pass){FX.rain(200);sound('win');}else sound('ok');},900);
+    setTimeout(()=>$('#total').scrollIntoView({behavior:'smooth',block:'start'}),100);};}
+
+/* ================= 错题本 ================= */
+function vWrong(){const ks=Object.keys(S.wrong).filter(k=>Q[k]);
+  if(!ks.length){app.innerHTML=topbar('错题本','')+`<div class="empty">${mascot('happy','mid')}<h2>错题本是空的</h2><p>去做一套模拟考，看看还有哪里会错。</p><a class="btn" href="#exam">去模拟考场</a></div>`;return;}
+  app.innerHTML=topbar('错题本','',`<span class="chip c-ke">${ks.length} 道</span>`)+`<div class="intro">每道错题在闪电战里<b>答对一次</b>就会被消灭。清空之后，选择题就稳了。</div>
+  <button class="btn full b-coral" id="rw" style="margin:14px 0">重刷错题本</button><div class="wl">${ks.map(k=>wItem(Q[k])).join('')}</div>`;
+  $('#rw').onclick=()=>startBZ('wrong',shuffle(ks).slice(0,30));}
+
+/* ================= 考场锦囊 ================= */
+const KOU=[['zhe','三大规律','对立统一：动力和源泉；质量互变：状态和形式；否定之否定：趋势和道路'],['zhe','总特征与核心','总观点、总特征＝联系和发展；实质、核心＝对立统一'],
+ ['zhe','认识论四象限','从天上掉下来：客观唯心；人脑自生：主观唯心；直观反映：旧唯物；能动反映：辩证唯物'],['zhe','感性与理性','感觉、知觉、表象是感性；概念、判断、推理是理性'],
+ ['zhe','决定与影响','物质资料生产方式起决定作用；地理环境、人口只能影响和制约'],['jing','三组「二」','商品二因素：使用价值／价值；劳动二重性：具体／抽象劳动；基本矛盾：私人／社会劳动'],
+ ['jing','两把尺子','按增殖作用分不变／可变资本；按周转方式分固定／流动资本'],['jing','空间并存，时间继起','产业资本顺利循环的两个条件，别写反'],
+ ['jing','垄断从松到紧','短期价格协定→卡特尔→辛迪加→托拉斯→康采恩→混合联合公司'],['ke','科社「第一」','宣言＝公开问世；巴黎公社＝第一次尝试；苏维埃俄国＝第一个国家；最高理想＝共产主义']];
+const KITL=['准考证（提前打印）','身份证','2B 铅笔两支（涂答题卡）','橡皮','黑色签字笔两支','看时间用的普通手表（按考点规定）','提前 30 分钟到考点'];
+function vKit(){const col={zhe:'var(--vio)',jing:'var(--orange)',ke:'var(--pink)'};const done=KITL.filter((_,i)=>S.kit[i]).length;
+  app.innerHTML=topbar('考场锦囊','')+`<section class="kit-sec"><h2>150 分钟怎么分</h2><div class="tl">
+   <div style="--c:var(--vio)"><b>0—35 分钟　选择题</b><span>25 道，平均一分半一道。拿不准的先涂一个，做记号，最后回来看。</span></div>
+   <div style="--c:var(--mint)"><b>35—85 分钟　简答题</b><span>5 道，每道 10 分钟。先写（1）（2）（3），再往里填。</span></div>
+   <div style="--c:var(--orange)"><b>85—130 分钟　论述题</b><span>三道都读完，挑两道。每道写「原理＋意义」两段。</span></div>
+   <div style="--c:var(--pink)"><b>130—150 分钟　检查</b><span>答题卡有没有漏涂，论述是不是两段都写满了。</span></div></div></section>
+  <section class="kit-sec"><h2>动笔四条铁律</h2>
+   <div class="rule"><span class="re">✏️</span><div><b>先写序号，再填内容</b><span>空着的序号会逼你想出下一点，宁可多写一条。</span></div></div>
+   <div class="rule"><span class="re">🎯</span><div><b>每点先写判断句</b><span>「社会存在决定社会意识」放最前面，解释放后面。</span></div></div>
+   <div class="rule"><span class="re">📑</span><div><b>论述写两段</b><span>原理答「是什么」，意义答「有什么用、怎么做」。</span></div></div>
+   <div class="rule"><span class="re">🔀</span><div><b>三选二，先读完再动笔</b><span>挑能写满两段的两道，别在第一道上死磕。</span></div></div></section>
+  <section class="kit-sec"><h2>十句救命口诀</h2>${KOU.map(k=>`<div class="kou" style="--c:${col[k[0]]}"><b>${k[1]}</b><span>${k[2]}</span></div>`).join('')}</section>
+  <section class="kit-sec"><h2>考试当天清单　<span class="muted small">${done}/${KITL.length}</span></h2>${KITL.map((t,i)=>`<label class="ck"><input type="checkbox" data-i="${i}" ${S.kit[i]?'checked':''}><span>${t}</span></label>`).join('')}</section>`;
+  $$('.kit-sec .ck input').forEach(c=>c.onchange=()=>{S.kit[c.dataset.i]=c.checked?1:0;save();sound('tap');if(KITL.every((_,i)=>S.kit[i])){unlock('kit');FX.burst(...ctr(c),40);}vKitCount();});}
+function vKitCount(){const h=$$('.kit-sec h2')[3];if(h)$('span',h).textContent=KITL.filter((_,i)=>S.kit[i]).length+'/'+KITL.length;}
+
+/* ================= 成就 / 设置 ================= */
+function vAch(){app.innerHTML=topbar('成就','')+`<p class="sq-hint">已解锁 ${Object.keys(S.ach).length} / ${ACH.length}</p><div class="ach-grid">${ACH.map(a=>`<div class="ach ${S.ach[a[0]]?'':'lock'}"><div class="md">${a[1]}</div><b>${a[2]}</b><span>${a[3]}</span></div>`).join('')}</div>`;}
+function vSettings(){app.innerHTML=topbar('设置','')+`<div class="set"><label>考试日期<input type="date" id="sd" value="${S.date}"></label>
+  <label>音效<input type="checkbox" class="sw" id="ss" ${S.sound?'checked':''}></label><label>震动<input type="checkbox" class="sw" id="sv" ${S.vib?'checked':''}></label>
+  <div class="sr"><span>清空全部进度</span><button class="btn btn-sm b-coral" id="rst">清空</button></div></div>
+  <p class="about">题目来源：闪电战 84 题取自 2017—2026 年历年真题；模拟考为 2025 年 10 月、2026 年 4 月两套 15044 原卷，2025 年卷解析与主观题答案来自资料所附参考答案（含教材页码），2026 年卷选择题解析为整理编写。估分仅供参考。</p>`;
+  $('#sd').onchange=e=>{S.date=e.target.value;save();FX.toast('考试日期已保存');};$('#ss').onchange=e=>{S.sound=e.target.checked?1:0;save();};$('#sv').onchange=e=>{S.vib=e.target.checked?1:0;save();if(S.vib)vib(40);};
+  $('#rst').onclick=()=>openModal(`<h3>清空全部进度？</h3><p class="mm">闪卡、错题本、经验、成就和考试记录都会删除，不能恢复。</p><div class="mbtns"><button class="btn b-ghost" data-close>取消</button><button class="btn b-coral" id="y">清空</button></div>`,(m,close)=>{$('#y',m).onclick=()=>{const d=S.date;S=fresh();S.date=d;save();close();location.hash='';render();};});}
+
+/* ================= 路由 ================= */
+const ROUTES=[[/^$/,vHome],[/^cards$/,vCards],[/^blitz$/,vBlitz],[/^blitz\/play$/,vBZPlay],[/^blitz\/done$/,vBZDone],[/^sq$/,vSQList],[/^sq\/(\w+)$/,vSQ],
+ [/^exam$/,vExamList],[/^exam\/(e\d+)$/,vExam],[/^exam\/(e\d+)\/grade$/,vGrade],[/^wrong$/,vWrong],[/^kit$/,vKit],[/^ach$/,vAch],[/^settings$/,vSettings]];
+function render(){clearInterval(exTimer);const h=location.hash.replace(/^#\/?/,'');for(const [re,fn] of ROUTES){const m=h.match(re);if(m){fn(...m.slice(1));
+  app.classList.remove('enter');void app.offsetWidth;app.classList.add('enter');window.scrollTo(0,0);return;}}vHome();}
+addEventListener('hashchange',render);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)save();});
+daily();save();render();
+</script></body></html>
